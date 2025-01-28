@@ -1,0 +1,388 @@
+---
+title: "Matrix Algebra"
+author: "Kelly Robbins"
+date: "2025-01-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Matrices and Matrix Operations
+
+## Why use matrices?
+
+### - Compact representation 
+### - Matrix algebra operations simplify computation
+### - Lots of optimized algorithms for storing and operating with matrices
+
+#### Here are the basics of matrix notation:
+
+\begin{equation}
+  \mathbf{A} = \begin{bmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9\\
+  \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+  \mathbf{A_{i=2,j=3}} = 6
+\end{equation}
+
+\begin{equation}
+  \mathbf{A} = \begin{bmatrix}
+    \mathbf{B} & \mathbf{C} \\
+  \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+ \mathbf{B } = \begin{bmatrix}
+    1 & 2 \\
+    4 & 5\\
+    7 & 8
+  \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+ \mathbf{C} = \begin{bmatrix}
+    3 \\
+    6\\
+    9
+  \end{bmatrix}
+\end{equation}
+
+
+## Matrix operations
+
+### Transpose
+$\mathbf{X}^{t} or \mathbf{X}^{'}$
+
+\begin{equation}
+  \begin{bmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9 \\
+  \end{bmatrix}^{t} =
+  \begin{bmatrix}
+    1 & 4 & 7 \\
+    2 & 5 & 8 \\
+    3 & 6 & 9 \\
+  \end{bmatrix}
+\end{equation}
+
+### Multiplication
+$\mathbf{Z}\mathbf{Y}$
+\begin{equation}
+  \begin{bmatrix}
+    a & b  \\
+    c & d \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    A \\
+    B\\
+  \end{bmatrix} =
+  \begin{bmatrix}
+    aA + bB \\
+    cA + dB\\
+  \end{bmatrix}
+\end{equation}
+
+### When multiplying two matrices the number of columns in the first matrix must equal the number of rows in the second matrix.
+
+### Addition
+$\mathbf{A} + \mathbf{B}$ 
+\begin{equation}
+  \begin{bmatrix}
+    1 & 2  \\
+    3 & 4 \\
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    5 & 6\\
+    7 & 8\\
+  \end{bmatrix} =
+  \begin{bmatrix}
+    6 & 8 \\
+    10 & 12\\
+  \end{bmatrix}
+\end{equation}
+
+### When adding two matrices the number of coumns and rows must by the same in each matrix.
+
+### Scalar by matrix
+$b\mathbf{Q}$
+\begin{equation}
+  3
+  \begin{bmatrix}
+    3 & 9\\
+    4 & 10\\
+  \end{bmatrix} =
+  \begin{bmatrix}
+    9 & 27 \\
+    12 & 30\\
+  \end{bmatrix}
+\end{equation}
+
+---
+# Special matrices
+
+### Column
+\begin{equation}
+  \begin{bmatrix}
+    3 \\
+    4 \\
+    5 \\
+  \end{bmatrix}
+\end{equation}
+
+
+### Row 
+\begin{equation}
+  \begin{bmatrix}
+    3  & 4 & 5\\
+  \end{bmatrix}
+\end{equation}
+
+### Identity
+\begin{equation}
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+  \end{bmatrix}
+\end{equation}
+
+### Symmetrical
+\begin{equation}
+  \begin{bmatrix}
+    1 & 2 & 3 \\
+    2 & 1 & 4 \\
+    3 & 4 & 1 \\
+  \end{bmatrix}
+\end{equation}
+
+
+## Inverse
+
+### In linear algebra we use division to solve for unknown variables 
+
+ $a*b = c$
+
+ $\frac{a*b}{a}=\frac{c}{a}$
+
+ $b=\frac{c}{a}$
+
+### When using matrices we solve equations using the inverse.
+
+The inverse of $\mathbf{A}$ is denoted as  $\mathbf{A^{-1}}$  
+
+and 
+
+$\mathbf{A}\mathbf{A^{-1}} = \mathbf{I}$
+
+Lets look at an example
+
+```{r inverse}
+# first we allocate a matrix A
+# There are several ways to do this but I will start by creat a 3x3 matrix of 0s
+A=matrix(0,3,3)
+# the first value is what I want stored in the matrix followed by the number of rows and columns
+print(A)
+# now set the values of A, one column at a time
+# A[row,column]
+A[,1] = c(3,2,1)
+A[,2] = c(2,4,2)
+A[,3] = c(1,2,4)
+print("A")
+print(A)
+# here we calculate the inverse of A using the R function solve()
+Ainv=solve(A)
+print("A inverse")
+print(Ainv)
+
+# finally we multiply A by Ainv to show that we get the identity matrix
+print("A multiple by its inverse")
+print(A%*%Ainv)
+
+
+
+
+```
+
+Any matrix multiplied by the Identity matrix (with conforming dimensions) is equal to itself. Similar to dividing or multiplying a scalar by 1.
+
+$\mathbf{A}\mathbf{I}=\mathbf{A}$
+
+```{r identity}
+# Calculating the Identity matrix by multiplying A by its inverse
+I=A%*%Ainv
+
+A%*%I
+```
+
+
+
+
+
+## Using matrices to represent a system of equations
+
+### Let's look at an example of an experiment with 2 treatments and 8 observations. The first 4 observations were in treatment group 1 and the second 4 in treatment group 2.
+
+#### Using scalar notation we would represent the equation as:
+
+#### $y_{ij} = \beta_{i} + residual_{ij}$
+
+#### We can write each of the 8 equations as:
+
+#### $y_{11} = \beta_{1} + e_{11}$
+#### $y_{12} = \beta_{1} + e_{12}$
+#### $y_{13} = \beta_{1} + e_{13}$
+#### $y_{14} = \beta_{1} + e_{14}$
+#### $y_{21} = \beta_{2} + e_{21}$
+#### $y_{22} = \beta_{2} + e_{22}$
+#### $y_{23} = \beta_{2} + e_{23}$
+#### $y_{24} = \beta_{2} + e_{24}$
+
+#### By introducing and indicator variable taking on the value of 1 or 0 we can rewrite the above equations as:
+
+
+#### $y_{11} = 1*\beta_{1} + 0*\beta_{2} + e_{11}$
+#### $y_{12} = 1*\beta_{1} + 0*\beta_{2} + e_{12}$
+#### $y_{13} = 1*\beta_{1} + 0*\beta_{2} + e_{13}$
+#### $y_{14} = 1*\beta_{1} + 0*\beta_{2} + e_{14}$
+#### $y_{21} = 0*\beta_{1} + 1*\beta_{2} + e_{21}$
+#### $y_{22} = 0*\beta_{1} + 1*\beta_{2} + e_{22}$
+#### $y_{23} = 0*\beta_{1} + 1*\beta_{2} + e_{23}$
+#### $y_{24} = 0*\beta_{1} + 1*\beta_{2} + e_{24}$
+
+#### Using the second form of the equations and the properties of matrix multiplication we represent the set of equations in matrix form as 
+
+$\mathbf{y}=\mathbf{X}\mathbf{\beta}+\mathbf{e}$
+
+#### Where:
+
+$\mathbf{X} =$
+ \begin{equation}
+  \begin{bmatrix}
+    1 & 0 \\
+    1 & 0 \\
+    1 & 0 \\
+    1 & 0 \\
+    0 & 1 \\
+    0 & 1 \\
+    0 & 1 \\
+    0 & 1 \\
+  \end{bmatrix}
+ \end{equation}
+
+$\mathbf{\beta} =$
+\begin{equation}
+ \begin{bmatrix}
+  \beta_{1} \\
+  \beta_{2} \\
+  \end{bmatrix}
+\end{equation}
+ 
+$\mathbf{y} =$
+\begin{equation}
+  \begin{bmatrix}
+  y_{1} \\
+  y_{2} \\
+  y_{3} \\
+  y_{4} \\
+  y_{5} \\
+  y_{6} \\
+  y_{7} \\
+  y_{8} \\
+  \end{bmatrix}
+\end{equation}
+
+$\mathbf{e} =$
+\begin{equation}
+  \begin{bmatrix}
+  e_{1} \\
+  e_{2} \\
+  e_{3} \\
+  e_{4} \\
+  e_{5} \\
+  e_{6} \\
+  e_{7} \\
+  e_{8} \\
+  \end{bmatrix}
+\end{equation}
+
+
+#### Here $\mathbf{X}$ is called a design matrix. It's purpose is to map values in $\mathbf{y}$ to the variables in $\mathbf{\beta}$ 
+
+### Solving for the two treatment effects.
+
+#### In scalar notation the solutions for the two treatment effects are:
+
+#### $\hat{\beta_{1}} = \frac{\sum_{j=1}^{n_{j}} y_{1j}}{n_{j}}$
+#### and
+#### $\hat{\beta_{2}} = \frac{\sum_{j=1}^{n_{j}} y_{2j}}{n_{j}}$
+
+## Homework
+### For the homework assignment we will simulate data, contruct the corresponding design matrix, and use matrix algebra to estimate the treatment effects. The simulated dataset will have 18 obersevations from 3 treatments.
+
+1) Allocate a vector $\mathbf{y}$ to store the 18 phenotypes and then simulate observations from each treatment group. (2 pts)
+    a. Sample y1-y6 (given treatment 1) from a normal distribution with mean 3 and variance 1
+    b. Sample y7-y12 (given treatment 2) from a normal distribution with mean 9 and variance 1
+    c. Sample y13-y18 (given treatment 3) from a normal distribution with mean 14 and variance 1
+
+```{r}
+y <- c()
+phenoset_1 <- rnorm(6,3,1)
+phenoset_2 <- rnorm(6,9,1)
+phenoset_3 <- rnorm(6,14,1)
+y=c(phenoset_1,phenoset_2,phenoset_3)
+print(y)
+```
+
+2) Set up the appropriate design matrix $\mathbf{X}$ for the simulated data $\mathbf{y}$. (2 pts) 
+
+```{r}
+X <- matrix(nrow = 18, ncol=3)
+X[,1]=c(rep(1,times=6),rep(0,times=12))
+X[,2]=c(rep(0,times=6),rep(1,times=6),rep(0,times=6))
+X[,3]=c(rep(0,times=12),rep(1,times=6))
+print(X)
+```
+
+
+3) Calculate $\mathbf{X^t}\mathbf{y}$. What does each value in $\mathbf{X^t}\mathbf{y}$ represent? (2 pts)
+
+```{r}
+Xt_y <- t(X)%*%y
+print(Xt_y)
+```
+These values each represent the sums of the phenotypes from each treatment groups, these are the numerators in the equations to calculate the $\beta$ values.
+
+4) Calculate $\mathbf{X^t}\mathbf{X}$. What does each value in $\mathbf{X^t}\mathbf{X}$ represent? (2 pts)
+
+```{r}
+Xt_X <- t(X) %*% X
+print(Xt_X)
+```
+These values in the diagonal of the matrix represent the count of observations (n) in each treatment group. This is the denominator in the equations to calculate the $\beta$ values.
+
+5) Using $\mathbf{X^t}\mathbf{X}$ and $\mathbf{X^t}\mathbf{y}$ calculate $\mathbf{\hat{\beta}}$ where $\hat{\beta_{1}} = \frac{\sum_{j=1}^{6} y_{1j}}{6}$, $\hat{\beta_{2}} = \frac{\sum_{j=1}^{6} y_{2j}}{6}$, and $\hat{\beta_{3}} = \frac{\sum_{j=1}^{6} y_{3j}}{6}$. (2 pts)
+
+```{r}
+Xt_Xinv <- solve(Xt_X)
+print(Xt_Xinv)
+```
+```{r}
+betas <-Xt_Xinv%*%Xt_y
+print(betas)
+```
+
+Here $\beta_1=$ `r betas[1]` and $\beta_2=$ `r betas[2]` and $\beta_3=$ `r betas[3]`
+
+
+
+
+
+
