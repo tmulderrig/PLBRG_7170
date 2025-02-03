@@ -197,10 +197,6 @@ print(varS)
 # Homework
 1) Use `workflowr` to set up the file structure for this lab. **(2.5 5pts)**
 
-```{r}
-wflow_start("lab1_tpm")
-```
-
 2) Using this markdown file as a  starting point, or creating your own markdown file, write code to:
 - Create a loop that will sample variables from a normal distribution 100 times. **(1 pt)**
 - In each loop sample 10 values from a normal distribution with mean= 5 and variance =9. **(1 pt)** 
@@ -233,9 +229,6 @@ hist(var_est)
 The histogram of the mean estimates seems to be approximately normally distributed and centered slightly above 5. The distribution of the variances is obviously right skewed with a mean probably somewhere around 8 or so.
 
 4) Put the markdown file in the appropriate folder and build the html files using workflowr. **(2.5 pts)**
-```{r}
-wflow_build()
-```
 
 
 Compress the full folder structure created by workflowr and upload to Canvas before the next lab period. 

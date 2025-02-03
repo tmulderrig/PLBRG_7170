@@ -10,4 +10,6 @@ editor_options:
 
 This is my site for submitting work for PLBRG7170 course
 
-[Lab 1]()
+[Lab 1](lab1_Simulate.html)
+
+[Lab 2](lab2_MatrixAlgebra.html)
