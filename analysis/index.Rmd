@@ -15,3 +15,5 @@ This is my site for submitting work for PLBRG7170 course
 [Lab 2](lab2_MatrixAlgebra.html)
 
 [Problem Set 1](pset1_tpm.html)
+
+[Lab 3](Lab3_ProgrammingAlphaSimR.html)
