@@ -202,6 +202,8 @@ cat("Expected fraction heterozygous", 1 / 2^nGenSelf, "\n",
 
 > What was wrong with my reasoning about the Expected fraction heterozygous?
 
+Not all of the QTL loci started out as heterozygous in the founders. 
+
 ### Simulate outbreak of variation  
 We will  
 1. pick a random pair of inbred individuals  
@@ -258,8 +260,29 @@ utils::write.csv(qtl, here::here("output", "QTLgenotypes.csv"))
 
 # Homework  
 Illustrate regression to the mean between parents and offspring using AlphaSimR  
-1. You know how to create a population -- create a population of parents  
+1. You know how to create a population -- create a population of parents 
+
+I am going to try using the inbred=TRUE argument in runMacs() to see the impact this has.
+
+```{r Create Population of Parents}
+set.seed(1234)
+
+nFounders_b <- 200
+nChr <- 10
+nSitesPerChr <- 1000
+parents_haps <- AlphaSimR::runMacs(nFounders_b, nChr, nSitesPerChr, inbred = FALSE)
+SP_b <- AlphaSimR::SimParam$new(parents_haps)
+SP_b$addTraitA(nQtlPerChr = 100)
+parents <- AlphaSimR::newPop(parents_haps,SP_b)
+```
+
 2. You know how to get phenotypes from that population  
+
+```{r}
+par_pop <- AlphaSimR::setPheno(parents, varE=1,simParam = SP_b)
+hist(par_pop@pheno, main="Parent Phenotypes", xlab = "Phenotype")
+```
+
 3. You want to randomly mate that population to get progeny that will be (we assume)
 regressed to the mean. Create a `crossPlan` matrix like I did to generate the
 F1s, except that each row should have randomly-picked parents, rather than 1 and
@@ -268,12 +291,73 @@ its documentation. If you use that command, you will have to find the pedigree
 of the progeny using the `@mother` and `@father` ids of the progeny population
 and match those up to the parent population. If you make the crossPlan, then it
 gives you the seed and pollen parent ids.
+
+```{r}
+nF1s_b <- 200
+pollen_parents <- sample(min(par_pop@iid):max(par_pop@iid), nF1s_b, replace = TRUE)
+seed_parents <- sample(min(par_pop@iid):max(par_pop@iid), nF1s_b, replace = TRUE)
+crossPlan_b <- as.matrix(cbind(pollen_parents,seed_parents))
+
+f1_pop_b <- AlphaSimR::makeCross(par_pop,crossPlan = crossPlan_b, simParam = SP_b)
+```
+
 4. Having made the progeny population, phenotype it also  
-5. Use each row of the `crossPlan` to find the two parents and calculate their phenotypic mean  
+
+```{r}
+f1_pop_b_pheno <- AlphaSimR::setPheno(f1_pop_b, varE=1, simParam = SP_b)
+hist(f1_pop_b_pheno@pheno, main="F1 Phenotypes", xlab="Phenotypes")
+```
+
+5. Use each row of the `crossPlan` to find the two parents and calculate their phenotypic mean 
+
+```{r}
+crossPlan_b <- as.data.frame(crossPlan_b)
+colnames(crossPlan_b)=c("pollen_parent","seed_parent")
+crossPlan_b$seed_parent_pheno <- NA
+crossPlan_b$pollen_parent_pheno <- NA
+for (i in 1:nrow(crossPlan_b)){
+  seed_parent <- par_pop[crossPlan_b[i,"seed_parent"]]
+  pollen_parent <- par_pop[crossPlan_b[i,"pollen_parent"]]
+  crossPlan_b[i,"seed_parent_pheno"] <- seed_parent@pheno
+  crossPlan_b[i,"pollen_parent_pheno"] <- pollen_parent@pheno
+}
+crossPlan_b$midparent_value <- rowMeans(cbind(crossPlan_b$seed_parent_pheno,crossPlan_b$pollen_parent_pheno))
+
+phenotypes <- as.data.frame(cbind(crossPlan_b$midparent_value, f1_pop_b_pheno@pheno))
+colnames(phenotypes) <- c("midparent_value", "progeny_pheno")
+```
+
 6. Make a scatterplot of the progeny phenotypes against the parent mean phenotypes  
 
+```{r}
+ggplot(data=phenotypes, aes(x=midparent_value, y=progeny_pheno)) +
+  geom_point()
+```
+
+
 > What is the regression coefficient?  
+
+```{r}
+lin.mod <- lm(progeny_pheno~midparent_value, data=phenotypes)
+reg_coef <- lin.mod$coefficients[2]
+print(reg_coef)
+```
+
+The regression coefficient of progeny phenotypes regressed on midparent values is 0.4784871. 
+
 > How much closer to the mean are offspring, on average, compared to their parents?  
+
+```{r}
+mean_pheno <- mean(c(phenotypes$progeny_pheno,par_pop@pheno))
+print(mean_pheno)
+phenotypes$midpar_dev <- phenotypes$midparent_value-mean_pheno
+avg_midpar_dev <- mean(phenotypes$midpar_dev)
+phenotypes$prog_dev <- phenotypes$progeny_pheno-mean_pheno
+avg_prog_dev <- mean(phenotypes$prog_dev)
+avg_midpar_dev-avg_prog_dev
+```
+
+On average, progeny were 0.1455552 units closer to the average phenotype in the population than their parents. 
 
 ### Homework grading  
 I want to receive a zipped folder with your homework in it one week from today, by midnight.  If you use the `workflowr` package to create the folder structure, that's great. You should have created an Rmarkdown script that will create an html file that I can look through. So:  
