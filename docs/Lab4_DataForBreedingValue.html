@@ -360,7 +360,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -371,8 +371,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -381,13 +381,13 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-25
+<strong>Last updated:</strong> 2025-02-26
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>PLBRG_7170/</code> <span
@@ -410,21 +410,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R
-Markdown file created these results, you’ll want to first commit it to
-the Git repo. If you’re still working on the analysis, you can ignore
-this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -515,15 +512,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170treeba34ff682968aca86fb420fe14b17c214d91cb59targetblankba34ff6a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170tree214853027c4d789523ca786b912ae41e5a555c13targetblank2148530a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/tmulderrig/PLBRG_7170/tree/ba34ff682968aca86fb420fe14b17c214d91cb59" target="_blank">ba34ff6</a>
+<a href="https://github.com/tmulderrig/PLBRG_7170/tree/214853027c4d789523ca786b912ae41e5a555c13" target="_blank">2148530</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170treeba34ff682968aca86fb420fe14b17c214d91cb59targetblankba34ff6a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170tree214853027c4d789523ca786b912ae41e5a555c13targetblank2148530a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -533,7 +530,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/tmulderrig/PLBRG_7170/tree/ba34ff682968aca86fb420fe14b17c214d91cb59" target="_blank">ba34ff6</a>.
+<a href="https://github.com/tmulderrig/PLBRG_7170/tree/214853027c4d789523ca786b912ae41e5a555c13" target="_blank">2148530</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -552,17 +549,7 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
-
-Untracked files:
-    Untracked:  analysis/Lab4_DataForBreedingValue.Rmd
-    Untracked:  analysis/pset1_tpm.pdf
-
-Unstaged changes:
-    Modified:   analysis/Lab3_ProgrammingAlphaSimR.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   analysis/lab2_MatrixAlgebra.Rmd
-    Modified:   analysis/pset1_tpm.Rmd
-    Modified:   output/QTLgenotypes.csv
+    Ignored:    analysis/.Rhistory
 
 </code></pre>
 <p>
@@ -578,9 +565,73 @@ have uncommitted changes.
 </div>
 <div id="versions" class="tab-pane fade">
 <p>
-There are no past versions. Publish this analysis with
-<code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were
+made to the R Markdown
+(<code>analysis/Lab4_DataForBreedingValue.Rmd</code>) and HTML
+(<code>docs/Lab4_DataForBreedingValue.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/analysis/Lab4_DataForBreedingValue.Rmd" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+<td>
+everything up thru pset 2
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/214853027c4d789523ca786b912ae41e5a555c13/docs/Lab4_DataForBreedingValue.html" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+<td>
+everything up thru pset 2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -668,7 +719,84 @@ corBVGV &lt;- cor(AlphaSimR::gv(founders), AlphaSimR::bv(founders)) %&gt;%
 plot(AlphaSimR::gv(founders), AlphaSimR::bv(founders), pch = 16, xlab = &quot;Genotypic value&quot;,
     ylab = &quot;Breeding value&quot;, main = paste0(&quot;BV vs GV: ADE model, cor=&quot;, corBVGV),
     cex.axis = 1.3, cex.lab = 1.3)</code></pre>
-<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Compare%20breeding%20value%20to%20genotypic%20value-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/Compare%20breeding%20value%20to%20genotypic%20value-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Compare%20breeding%20value%20to%20genotypic%20value-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Compare-breeding-value-to-genotypic-value-1">
+Past versions of "Compare breeding value to genotypic value-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Compare-breeding-value-to-genotypic-value-1"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/Compare breeding value to genotypic value-1.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Compare%20breeding%20value%20to%20genotypic%20value-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Compare-breeding-value-to-genotypic-value-2">
+Past versions of "Compare breeding value to genotypic value-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-Compare-breeding-value-to-genotypic-value-2"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/Compare breeding value to genotypic value-2.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="estimated-versus-analytical-breeding-value"
 class="section level2">
@@ -714,7 +842,82 @@ estimatedBV &lt;- sapply(1:AlphaSimR::nInd(founders), estimateBV, pop = founders
 # Compare estimated and analytical breeding values
 plot(estimatedBV, AlphaSimR::bv(founders), pch = 16, xlab = &quot;Estimated value&quot;, ylab = &quot;Analytical value&quot;,
     main = paste(&quot;Breeding value estimated from&quot;, nProgeny2, &quot;Progeny&quot;))</code></pre>
-<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Estimate%20breeding%20value-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/Estimate%20breeding%20value-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Estimate%20breeding%20value-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Estimate-breeding-value-1">
+Past versions of "Estimate breeding value-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Estimate-breeding-value-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/Estimate breeding value-1.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Estimate%20breeding%20value-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Estimate-breeding-value-2">
+Past versions of "Estimate breeding value-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-Estimate-breeding-value-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/Estimate breeding value-2.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="round-robin-crossing-design" class="section level2">
 <h2>Round robin crossing design</h2>
@@ -788,13 +991,88 @@ plot(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines), pch = 16, xlab = &qu
 # A tibble: 6 × 5
   id    seedPar pollenPar pheno[,&quot;Trait1&quot;]  varE
   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt;
-1 5601  1       2                   0.290      1
-2 5602  2       3                   1.60       1
-3 5603  3       4                   0.0527     1
-4 5604  4       5                  -1.32       1
-5 5605  5       6                   1.30       1
-6 5606  6       7                  -0.802      1</code></pre>
-<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Set%20up%20records-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/Set%20up%20records-2.png" width="672" style="display: block; margin: auto;" /></p>
+1 5601  1       2                    2.01      1
+2 5602  2       3                   -2.72      1
+3 5603  3       4                   -2.03      1
+4 5604  4       5                   -0.783     1
+5 5605  5       6                    1.16      1
+6 5606  6       7                    0.681     1</code></pre>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Set%20up%20records-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Set-up-records-1">
+Past versions of "Set up records-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Set-up-records-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/Set up records-1.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Set%20up%20records-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Set-up-records-2">
+Past versions of "Set up records-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-Set-up-records-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/Set up records-2.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="use-records-to-estimate-genotypic-value-from-1-observation"
@@ -810,6 +1088,43 @@ corEstGV &lt;- cor(AlphaSimR::gv(exptLines), gvEstimates) %&gt;%
 plot(AlphaSimR::gv(exptLines), gvEstimates, pch = 16, xlab = &quot;Genetic value&quot;, ylab = &quot;Phenotype&quot;,
     main = paste0(&quot;Both Evaluations, cor=&quot;, corEstGV))</code></pre>
 <p><img src="figure/Lab4_DataForBreedingValue.Rmd/Linear%20model%20estimation-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Linear-model-estimation-1">
+Past versions of "Linear model estimation-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Linear-model-estimation-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/Linear model estimation-1.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="use-records-in-two-stage-selection" class="section level2">
 <h2>Use records in two-stage selection</h2>
@@ -844,7 +1159,7 @@ tibble [500 × 5] (S3: tbl_df/tbl/data.frame)
  $ id       : chr [1:500] &quot;5701&quot; &quot;5702&quot; &quot;5703&quot; &quot;5704&quot; ...
  $ seedPar  : chr [1:500] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; ...
  $ pollenPar: chr [1:500] &quot;2&quot; &quot;2&quot; &quot;2&quot; &quot;2&quot; ...
- $ pheno    : num [1:500, 1] -2.65 2.056 4.305 3.411 -0.319 ...
+ $ pheno    : num [1:500, 1] -0.0161 1.6729 0.3727 1.3476 -1.3962 ...
  $ varE     : num [1:500] 4 4 4 4 4 4 4 4 4 4 ...</code></pre>
 </div>
 <div id="estimate-gain-from-selection-four-ways" class="section level2">
@@ -871,11 +1186,11 @@ print(paste(&quot;Gain from selection&quot;, round(mean(AlphaSimR::gv(exptLines)
 [1] &quot;Gain from selection on BV where the reference pop is stage2Lines&quot;
 [1] &quot;Gain from selection 0&quot;
 [1] &quot;Gain from selection on BV where the reference pop is all exptLines&quot;
-[1] &quot;Gain from selection 0.53&quot;
+[1] &quot;Gain from selection 0.59&quot;
 [1] &quot;Gain from selection on **GV** where the reference pop is stage2Lines&quot;
-[1] &quot;Gain from selection 0.64&quot;
+[1] &quot;Gain from selection 0.69&quot;
 [1] &quot;Gain from selection on **GV** where the reference pop is all exptLines&quot;
-[1] &quot;Gain from selection 0.64&quot;</code></pre>
+[1] &quot;Gain from selection 0.69&quot;</code></pre>
 </div>
 <div id="homework" class="section level2">
 <h2>Homework</h2>
@@ -900,6 +1215,43 @@ obtained by the <code>bv</code> function or by our own
 <pre class="r"><code>corBV_lmBV &lt;- cor(AlphaSimR::bv(founders), lmEstParBV$coefficients)
 plot(AlphaSimR::bv(founders), lmEstParBV$coefficients)</code></pre>
 <p><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-2-1.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ol start="3" style="list-style-type: decimal">
 <li>The <code>lm</code> function from the <code>stats</code> package can
 account for observations with different weights. Weights should be the
@@ -918,10 +1270,10 @@ function.</li>
 </ol>
 <pre class="r"><code>cor(AlphaSimR::gv(founders), lmEstParBV$coefficients)
 cor(AlphaSimR::gv(founders), lmEstParBV_wgtd$coefficients)
-                [,1]
-Trait1 -0.0009093427
-                [,1]
-Trait1 -0.0002745567</code></pre>
+             [,1]
+Trait1 0.05610957
+            [,1]
+Trait1 0.1027484</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li><em>BONUS</em> for everyone: There is random error associated with
 all of these simulations. If you want to see how the breeding value from
@@ -971,7 +1323,82 @@ ggplot(data = as.data.frame(corBV_lmBV_wgt_it), aes(x = corBV_lmBV_wgt_it)) + ge
         2)))) + annotate(&quot;text&quot;, x = 0.2, y = 140, label = (paste0(&quot;SD: &quot;, round(sd(corBV_lmBV_wgt_it),
     2)))) + theme_classic()
 </code></pre>
-<p><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-1.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-2">
+Past versions of unnamed-chunk-6-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/214853027c4d789523ca786b912ae41e5a555c13/docs/figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-2.png" target="_blank">2148530</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ol start="6" style="list-style-type: decimal">
 <li><em>BONUS</em> for stat heads. You could run a linear model with
 both <code>seedPar</code> and <code>pollenPar</code> as factors. But
@@ -984,7 +1411,7 @@ regardless of whether it was a seed or pollen parent?</li>
 pivot_lm &lt;- lm(pheno ~ 1 + parents, data = pivot_records)
 cor(AlphaSimR::bv(founders), coefficients(pivot_lm))
              [,1]
-Trait1 0.08074739</code></pre>
+Trait1 0.08514468</code></pre>
 <div id="homework-grading" class="section level3">
 <h3>Homework grading</h3>
 <p>I want to receive a zipped folder with your homework in it one week
@@ -1032,18 +1459,18 @@ loaded via a namespace (and not attached):
  [1] utf8_1.2.4        sass_0.4.9        generics_0.1.3    stringi_1.8.4    
  [5] hms_1.1.3         digest_0.6.37     magrittr_2.0.3    evaluate_1.0.1   
  [9] grid_4.4.1        timechange_0.3.0  fastmap_1.2.0     rprojroot_2.0.4  
-[13] workflowr_1.7.1   jsonlite_1.8.9    formatR_1.14      promises_1.3.2   
-[17] scales_1.3.0      jquerylib_0.1.4   Rdpack_2.6.2      cli_3.6.3        
-[21] crayon_1.5.3      rlang_1.1.4       rbibutils_2.3     bit64_4.5.2      
-[25] munsell_0.5.1     withr_3.0.2       cachem_1.1.0      yaml_2.3.10      
-[29] AlphaSimR_1.6.1   parallel_4.4.1    tools_4.4.1       tzdb_0.4.0       
-[33] colorspace_2.1-1  httpuv_1.6.15     here_1.0.1        vctrs_0.6.5      
-[37] R6_2.5.1          lifecycle_1.0.4   git2r_0.35.0      bit_4.5.0.1      
-[41] fs_1.6.5          vroom_1.6.5       pkgconfig_2.0.3   pillar_1.10.0    
-[45] bslib_0.8.0       later_1.4.1       gtable_0.3.6      glue_1.8.0       
-[49] Rcpp_1.0.13-1     xfun_0.49         tidyselect_1.2.1  rstudioapi_0.17.1
-[53] knitr_1.49        farver_2.1.2      htmltools_0.5.8.1 labeling_0.4.3   
-[57] rmarkdown_2.29    compiler_4.4.1   </code></pre>
+[13] workflowr_1.7.1   jsonlite_1.8.9    whisker_0.4.1     formatR_1.14     
+[17] promises_1.3.2    scales_1.3.0      jquerylib_0.1.4   Rdpack_2.6.2     
+[21] cli_3.6.3         crayon_1.5.3      rlang_1.1.4       rbibutils_2.3    
+[25] bit64_4.5.2       munsell_0.5.1     withr_3.0.2       cachem_1.1.0     
+[29] yaml_2.3.10       AlphaSimR_1.6.1   parallel_4.4.1    tools_4.4.1      
+[33] tzdb_0.4.0        colorspace_2.1-1  httpuv_1.6.15     here_1.0.1       
+[37] vctrs_0.6.5       R6_2.5.1          lifecycle_1.0.4   git2r_0.35.0     
+[41] bit_4.5.0.1       fs_1.6.5          vroom_1.6.5       pkgconfig_2.0.3  
+[45] pillar_1.10.0     bslib_0.8.0       later_1.4.1       gtable_0.3.6     
+[49] glue_1.8.0        Rcpp_1.0.13-1     xfun_0.49         tidyselect_1.2.1 
+[53] rstudioapi_0.17.1 knitr_1.49        farver_2.1.2      htmltools_0.5.8.1
+[57] labeling_0.4.3    rmarkdown_2.29    compiler_4.4.1   </code></pre>
 </div>
 </div>
 </div>
