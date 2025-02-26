@@ -1,0 +1,201 @@
+---
+title: "Benefits of Using Genetic Relationships"
+author: "Kelly Robbins"
+date: "2025-02-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Genetic Relationships: Identity by Descent
+### The genetic (co)variance between individuals for a given phenotype is determined by common alleles for the QTL that explain variance for the phenotype
+
+### In the absence of detailed information on the QTL, the (co)variance can be approximated by calculating the probability two individuals carry alleles that are identical by descent (IBD).
+### - IBD represents the probability that the same allele is inherited by two individuals from some common ancestor.
+### - These calculations can be done using pedigrees or genotypes
+
+## A simple illustration
+### In this exmple we are testing lines from 2 unrelated full sib families. The code below will simulate a polygenetic trait and compare prediction accuracy using a model that ignores genetic relationships and a mixed model that accounts for the relationships. ***you will need to download and install the package MASS***
+
+##Setting up parameters
+
+```{r paremeters}
+library(MASS)
+library(here)
+here::i_am("analysis/Lab_5.Rmd")
+#setting variety and residual variance
+VarA=75
+VarE=25
+#mean of the families relative to the overall mean
+meanFam=c(rep(-5,15),rep(5,15))
+```
+
+## Generating relationship matrix
+
+
+
+```{r Relationship Matirx}
+source(here::here("code/Simulate_and_Solve.R"))
+# this is the expected relationship matrix for to unrelated full-sib families
+# there is a total of 30 lines, 15 lines in each family
+#initializing a 30 x 30 matrix with all values = 0
+A=matrix(0,30,30)
+#creating a block of .5 for family 1
+A[1:15,1:15]=.5
+#creating a block of .5 for family 2
+A[16:30,16:30]=.5
+#setting the diagonal to 1
+diag(A)<-1
+print("A matrix")
+image(A)
+```
+## Simulate Breeding Values
+
+```{r simulate and solve}
+set.seed(35783948)
+# sampling 30 variety effects
+# now we are sampling from mvnorm since the variety effects are no longer iid
+BV=MASS::mvrnorm(1,meanFam,VarA*A)
+
+sol=simulate_and_solve(BV,A,VarA,VarE)
+# LSM - Least squares means
+# MM - BLUPs from the mixed model
+sol
+```
+
+
+## Questions 
+ 1)Conduct the following simulations using a difference in mean performance between the two families of 10.
+  
+   A.(1 pt)  Use VarA = 75 and VarE = 25 (heritability = .75). Change the seeds and run the simulation 5 times 
+      - Calculate the correlations between LSM and the true BV
+      - Calculate the correlations between MM and the true BV
+      - Plot the BLUPs against LSM 
+      
+```{r}
+corLSM_BV <- c()
+corMM_BV <- c()
+
+VarA=75
+VarE=25
+iterations <- 5
+
+starting_seed=1234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions <- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV[i] <- cor(solutions[,"LSM"],BV)
+  corMM_BV[i] <- cor(solutions[,"MM"],BV)
+  plot(solutions[,"MM"],solutions[,"LSM"], main="BLUPs vs LSM estimates", sub = paste("Iteration:",i, sep = ""))
+}
+
+mean(corLSM_BV)
+mean(corMM_BV)
+```
+
+  
+   B.(1 pt) Use VarA = 50 and VarE = 50 (heritability = .5). Change the seeds and run the simulation 5 times 
+      - calculate the correlations between LSM and the true BV
+      - calculate the correlations between MM and the true BV
+      - Plot the BLUPs against LSM 
+      
+```{r}
+corLSM_BV_2 <- c()
+corMM_BV_2 <- c()
+
+VarA=50
+VarE=50
+iterations <- 5
+
+starting_seed=2234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions <- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV_2[i] <- cor(solutions[,"LSM"],BV)
+  corMM_BV_2[i] <- cor(solutions[,"MM"],BV)
+  plot(solutions[,"MM"],solutions[,"LSM"], main="BLUPs vs LSM estimates", sub = paste("Iteration:",i, sep = ""))
+}
+
+mean(corLSM_BV_2)
+mean(corMM_BV_2)
+```
+
+  
+   C.(1 pt) Use VarA = 25 and VarE = 75 (heritability = .25). Change the seeds and run the simulation 5 times 
+      - Calculate the correlations between LSM and the true BV
+      - Calculate the correlations between MM and the true BV
+      - Plot the BLUPs against LSM 
+      
+```{r}
+corLSM_BV_3 <- c()
+corMM_BV_3 <- c()
+
+VarA=25
+VarE=75
+iterations <- 5
+
+starting_seed=3234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions <- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV_3[i] <- cor(solutions[,"LSM"],BV)
+  corMM_BV_3[i] <- cor(solutions[,"MM"],BV)
+  plot(solutions[,"MM"],solutions[,"LSM"], main="BLUPs vs LSM estimates", sub = paste("Iteration:",i, sep = ""))
+}
+
+mean(corLSM_BV_3)
+mean(corMM_BV_3)
+```
+
+      
+   D. (1 pt) What trends do you see in the plots of the BLUPS versus LSM? What would be causing this pattern?
+   
+   When the heritability is high, the distributions for the estimated breeding values of the two full-sib families are near each other. As the trait becomes less heritable, the block effects between the observations has a larger impact on the estimates, which leads to these two distributions emerging. 
+   
+   E. (1 pt) How does heritability impact the relative performance BLUPs and LSM in terms of accuracy (correlations to the true BV)? Why?
+   
+   The change in heritability had a larger relative impact on the LSM estimates rather than the BLUP estimates. The mean LSM estimates are based only on the average values and as the additive variance decreases relative to error variance, these estimates are based on lots of noise. The BLUP estimates use related individuals to inform estimates, which can estimate through the noise of the error variance. 
+   
+  2) Change the difference in mean performance between families to 5.
+ 
+   A) (3 pts) Repeat the simulations in outlined in  (1A-1C) 
+   
+```{r}
+
+
+corLSM_BV <- c()
+corMM_BV <- c()
+
+VarA=75
+VarE=25
+iterations <- 5
+
+starting_seed=1234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions <- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV[i] <- cor(solutions[,"LSM"],BV)
+  corMM_BV[i] <- cor(solutions[,"MM"],BV)
+  plot(solutions[,"MM"],solutions[,"LSM"], main="BLUPs vs LSM estimates", sub = paste("Iteration:",i, sep = ""))
+}
+
+mean(corLSM_BV)
+mean(corMM_BV)
+```
+
+   
+   B) (1 pt) How did the change in the difference in mean performance between families impact the relative performance of BLUPs and LSM? Why? 
+   
+  (1 point for turning in the assignment on time)
+
+
+```{r calculate correlation and plot solutions}
+
+
+```

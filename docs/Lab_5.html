@@ -9,11 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Timothy Mulderrig" />
+<meta name="author" content="Kelly Robbins" />
 
-<meta name="date" content="2025-02-03" />
+<meta name="date" content="2025-02-18" />
 
-<title>Pset 1</title>
+<title>Benefits of Using Genetic Relationships</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -351,9 +351,10 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Pset 1</h1>
-<h4 class="author">Timothy Mulderrig</h4>
-<h4 class="date">2025-02-03</h4>
+<h1 class="title toc-ignore">Benefits of Using Genetic
+Relationships</h1>
+<h4 class="author">Kelly Robbins</h4>
+<h4 class="date">2025-02-18</h4>
 
 </div>
 
@@ -382,7 +383,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-17
+<strong>Last updated:</strong> 2025-02-26
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -420,10 +421,10 @@ changes </a>
 <div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
 <code>wflow_publish</code> to commit the R Markdown file and build the
 HTML.</p>
 </div>
@@ -556,9 +557,18 @@ Ignored files:
 
 Untracked files:
     Untracked:  analysis/Lab4_DataForBreedingValue.Rmd
+    Untracked:  analysis/Lab_5.Rmd
+    Untracked:  analysis/pset1_tpm.pdf
+    Untracked:  analysis/pset2_tpm.Rmd
+    Untracked:  code/Simulate_and_Solve.R
+    Untracked:  data/Genomic_Rel.csv
+    Untracked:  data/Pedigree.csv
+    Untracked:  data/Pedigree_Rel.csv
+    Untracked:  data/SNP_data.csv
 
 Unstaged changes:
     Modified:   analysis/Lab3_ProgrammingAlphaSimR.Rmd
+    Modified:   analysis/index.Rmd
     Modified:   analysis/lab2_MatrixAlgebra.Rmd
     Modified:   analysis/pset1_tpm.Rmd
     Modified:   output/QTLgenotypes.csv
@@ -577,319 +587,251 @@ have uncommitted changes.
 </div>
 <div id="versions" class="tab-pane fade">
 <p>
-These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/pset1_tpm.Rmd</code>) and HTML
-(<code>docs/pset1_tpm.html</code>) files. If you’ve configured a remote
-Git repository (see <code>?wflow_git_remote</code>), click on the
-hyperlinks in the table below to view the files as they were in that
-past version.
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/5d117d57c13991031ba13f135eb8c0cf2ce21264/docs/pset1_tpm.html" target="_blank">5d117d5</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-04
-</td>
-<td>
-lab 3
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/d567d5adfdfcca694af50667f040825ec9005f25/docs/pset1_tpm.html" target="_blank">d567d5a</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-03
-</td>
-<td>
-pset 1 on homepage
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/tmulderrig/PLBRG_7170/blob/b498291fc0cc4b4afa61f040124bfd51743ba76a/analysis/pset1_tpm.Rmd" target="_blank">b498291</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-03
-</td>
-<td>
-pset1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/b498291fc0cc4b4afa61f040124bfd51743ba76a/docs/pset1_tpm.html" target="_blank">b498291</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-03
-</td>
-<td>
-pset1
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
 </div>
-<div id="q1" class="section level1">
-<h1>Q1</h1>
-<p>As a plant breeder I want to fix an allele that provides resistance
-to an important crop disease. Unfortunately, I do not have the ability
-to directly genotype the causative mutation,but I have identified a
-genetic marker that is closely linked the causative mutation. Based on
-mapping experiments the recombination frequency between the marker
-(alleles: A &amp; a) and the QTL (alleles: Q – resistant &amp; q –
-susceptible) is r = .25</p>
-<p>I have crossed a homozygous resistant line to a homozygous
-susceptible line to get an offspring with the genotype: [A/Q] [a/q]</p>
-<p>I will self this individual to generate offspring segregating for
-resistance.</p>
-<div id="a" class="section level2">
-<h2>1A)</h2>
-<p>If I select only lines with the genotype AA, what expected proportion
-of the selected lines that will be homozygous for the favorable QTL
-(QQ)? (2 pts)</p>
-<p>Frequency of possible gametes</p>
-<pre class="r"><code>r=0.25
-freq_AQ &lt;-  (1-r)*0.5
-freq_aq &lt;- (1-r)*0.5
-freq_Aq &lt;- r*(0.5)
-freq_aQ &lt;- r*(0.5)</code></pre>
-<p>Frequency of Genotype combinations in F2</p>
-<pre class="r"><code>#multiply by 2 in cases where unique gametes could originate from the pallen or egg donor
-
-AAQQ &lt;- freq_AQ*freq_AQ
-AAQq &lt;- freq_AQ*freq_Aq*2
-AAqq &lt;- freq_Aq*freq_Aq
-AaQQ &lt;- freq_AQ*freq_aQ*2
-AaQq &lt;- freq_AQ*freq_aq*2 + freq_Aq*freq_aQ*2
-Aaqq &lt;- freq_Aq*freq_aq*2
-aaQQ &lt;- freq_aQ*freq_aQ
-aaQq &lt;- freq_aQ*freq_aq*2
-aaqq &lt;- freq_aq*freq_aq
-
-AAQQ+AAQq+AAqq+AaQQ+AaQq+Aaqq+aaQQ+aaQq+aaqq</code></pre>
-<pre><code>[1] 1</code></pre>
-<p>Selected genotypes</p>
-<pre class="r"><code>sel_genos &lt;- AAQQ + AAQq + AAqq
-QQ_sel &lt;- AAQQ / sel_genos
-print(QQ_sel)</code></pre>
-<pre><code>[1] 0.5625</code></pre>
+<div id="genetic-relationships-identity-by-descent"
+class="section level2">
+<h2>Genetic Relationships: Identity by Descent</h2>
 <div
-id="answer-the-expected-proportion-of-aa-selected-lines-that-will-be-homozygous-for-the-resistance-qtl-is-56.25."
+id="the-genetic-covariance-between-individuals-for-a-given-phenotype-is-determined-by-common-alleles-for-the-qtl-that-explain-variance-for-the-phenotype"
 class="section level3">
-<h3>Answer: The expected proportion of AA selected lines that will be
-homozygous for the resistance QTL is 56.25%.</h3>
+<h3>The genetic (co)variance between individuals for a given phenotype
+is determined by common alleles for the QTL that explain variance for
+the phenotype</h3>
 </div>
-</div>
-</div>
-<div id="q2" class="section level1">
-<h1>Q2</h1>
-<p>Similar to Q1 I have identified markers linked to a QTL of interest
-and I now want to practice marker assisted selection to fix the
-favorable allele in a population. In this scenario I have 2 markers
-linked on either side of the QTL. Marker 1 (alleles A, a) has a
-recombination frequency r =.4 with the QTL and Marker 2 (alleles B, b)
-has a recombination frequency r =.3 with the QTL. As before I’ve crossed
-a line that is homozygous for the beneficial allele (Q) and a line that
-is homozygous for the unfavorable allele (q):</p>
-<p>[A/Q/B] x [a/q/b]</p>
-<p>I selfed the heterozygous line above to generate many offspring. The
-QQ genotype has a value of a = 5 for the trait of interest, the
-unfavorable genotype qq has a value of -a = -5 for the trait of
-interest. The trait is additive (no dominance)</p>
-<div id="a-1" class="section level2">
-<h2>2A)</h2>
-<p>As a breeder I want to fix the resistance allele. If I select only
-lines with the genotype AABB, what is the expected proportion of the
-selected lines that will be homozygous for the favorable QTL (QQ)? (2
-pts)</p>
-<p>Frequency of possible gametes</p>
-<pre class="r"><code>r1 &lt;- 0.4
-r2 &lt;- 0.3
-
-freq_AQB &lt;- 0.5*(1-r1)*(1-r2)
-freq_AQb &lt;- 0.5*(1-r1)*(r2)
-freq_Aqb &lt;- 0.5*(r1)*(1-r2)
-freq_AqB &lt;- 0.5*(r1)*(r2)
-freq_aQB &lt;- 0.5*(r1)*(1-r2)
-freq_aQb &lt;- 0.5*(r1)*(r2)
-freq_aqB &lt;- 0.5*(1-r1)*(r2)
-freq_aqb &lt;- 0.5*(1-r1)*(1-r2)
-
-freq_AQB + freq_AQb + freq_Aqb + freq_AqB + freq_aQB + freq_aQb + freq_aqB + freq_aqb</code></pre>
-<pre><code>[1] 1</code></pre>
-<p>Frequency of genotypes</p>
-<pre class="r"><code>AAQQBB &lt;- freq_AQB*freq_AQB
-AAQQBb &lt;- freq_AQB*freq_AQb*2
-AAQQbb &lt;- freq_AQb*freq_AQb
-AAQqBB &lt;- freq_AQB*freq_AqB*2
-AAQqBb &lt;- freq_AQB*freq_Aqb*2 + freq_AQb*freq_AqB*2
-AAQqbb &lt;- freq_AQb*freq_Aqb*2
-AAqqBB &lt;- freq_AqB*freq_AqB
-AAqqBb &lt;- freq_AqB*freq_Aqb*2
-AAqqbb &lt;- freq_Aqb*freq_Aqb
-AaQQBB &lt;- freq_AQB*freq_aQB*2 
-AaQQBb &lt;- freq_AQB*freq_aQb*2 + freq_AQb*freq_aQB*2
-AaQQbb &lt;- freq_AQb*freq_aQb*2
-AaQqBB &lt;- freq_AQB*freq_aqB*2 + freq_AqB*freq_aQB*2
-AaQqBb &lt;- freq_AQB*freq_aqb*2 + freq_AQb*freq_aqB*2 + freq_Aqb*freq_aQB*2 + freq_aQb*freq_AqB*2
-AaQqbb &lt;- freq_AQb*freq_aqb*2 + freq_Aqb*freq_aQb*2
-AaqqBB &lt;- freq_AqB*freq_aqB*2
-AaqqBb &lt;- freq_AqB*freq_aqb*2 + freq_aqB*freq_Aqb*2
-Aaqqbb &lt;- freq_Aqb*freq_aqb*2
-aaQQBB &lt;- freq_aQB*freq_aQB
-aaQQBb &lt;- freq_aQB*freq_aQb*2
-aaQQbb &lt;- freq_aQb*freq_aQb
-aaQqBB &lt;- freq_aQB*freq_aqB*2
-aaQqBb &lt;- freq_aQB*freq_aqb*2+freq_aQb*freq_aqB*2
-aaQqbb &lt;- freq_aQb*freq_aqb*2
-aaqqBB &lt;- freq_aqB*freq_aqB
-aaqqBb &lt;- freq_aqB*freq_aqb*2
-aaqqbb &lt;- freq_aqb*freq_aqb
-
-sum(c(AAQQBB, AAQQBb, AAQQbb, AAQqBB, AAQqBb, AAQqbb, AAqqBB, AAqqBb, AAqqbb, 
-  AaQQBB, AaQQBb, AaQQbb, AaQqBB, AaQqBb, AaQqbb, AaqqBB, AaqqBb, Aaqqbb, 
-  aaQQBB, aaQQBb, aaQQbb, aaQqBB, aaQqBb, aaQqbb, aaqqBB, aaqqBb, aaqqbb))</code></pre>
-<pre><code>[1] 1</code></pre>
-<p>Selected genotypes</p>
-<pre class="r"><code>sel_genos_b &lt;- AAQQBB + AAQqBB + AAqqBB
-QQ_sel_b &lt;- AAQQBB / sel_genos_b
-print(QQ_sel_b)</code></pre>
-<pre><code>[1] 0.6049383</code></pre>
 <div
-id="answer-the-expected-proportion-of-selected-lines-that-will-be-homozygous-for-the-resistance-qtl-is-60.49"
+id="in-the-absence-of-detailed-information-on-the-qtl-the-covariance-can-be-approximated-by-calculating-the-probability-two-individuals-carry-alleles-that-are-identical-by-descent-ibd."
 class="section level3">
-<h3>Answer: The expected proportion of selected lines that will be
-homozygous for the resistance QTL is 60.49 %</h3>
+<h3>In the absence of detailed information on the QTL, the (co)variance
+can be approximated by calculating the probability two individuals carry
+alleles that are identical by descent (IBD).</h3>
 </div>
-</div>
-<div id="b" class="section level2">
-<h2>2B)</h2>
-<p>What is the expected value for offspring with the genotype AABB? (3
-pts)</p>
-<pre class="r"><code>AABB_e &lt;- AAQQBB*5 + AAQqBB*0 + AAqqBB*-5
-print(AABB_e)</code></pre>
-<pre><code>[1] 0.2025</code></pre>
-<div id="answer-the-expected-value-for-offspring-with-aabb-is-0.2025"
-class="section level3">
-<h3>Answer: The expected value for offspring with AABB is 0.2025</h3>
-</div>
-</div>
-<div id="c" class="section level2">
-<h2>2C)</h2>
-<p>What is the expected value for lines with the genotype AA? (3
-pts)</p>
-<pre class="r"><code>AAQQBB*5 + AAQQBb*5 + AAQQbb*5 + AAQqBB*0 + AAQqBb*0 + AAQqbb*0 + AAqqBB*(-5) + AAqqBb*(-5) + AAqqbb*(-5)</code></pre>
-<pre><code>[1] 0.25</code></pre>
-<div id="answer-the-expected-value-for-lines-with-aa-is-0.25"
-class="section level3">
-<h3>Answer: The expected value for lines with AA is 0.25</h3>
-</div>
-</div>
-<div id="d" class="section level2">
-<h2>2D)</h2>
-<p>What is the expected value for lines with the genotype BB? (3
-pts)</p>
-<pre class="r"><code>AAQQBB*5 + AaQQBB*5 + aaQQBB*5 + AAQqBB*0 + AaQqBB*0 + aaQqBB*0 + AAqqBB*(-5) + AaqqBB*(-5) + aaqqBB*(-5)</code></pre>
-<pre><code>[1] 0.5</code></pre>
-<div id="answer-the-expected-value-for-lines-with-bb-is-0.5"
-class="section level3">
-<h3>Answer: The expected value for lines with BB is 0.5</h3>
-</div>
-</div>
-<div id="e" class="section level2">
-<h2>2E)</h2>
-<p>How close would a single marker need to be in order for marker
-assisted selection to as effective and the two marker example above? (2
-pts)</p>
-<p>Assume there is a marker c that is linked to qtl q with a
-recombination frequency of rc between c and q in the gametes
-[C/Q][c/q].</p>
-<p>The potential gametes appear with the frequencies: * [C/Q] =
-0.5<em>(1-rc) </em> [C/q] = 0.5<em>(rc) </em> [c/Q] = 0.5<em>(rc) </em>
-[c/q] = 0.5*(1-rc)</p>
-<p>The resulting genotypes appear with the frequenies:</p>
-<ul>
-<li>CCQQ &lt;- freq_CQ*freq_CQ</li>
-<li>CCQq &lt;- freq_CQ* freq_Cq*2</li>
-<li>CCqq &lt;- freq_Cq*freq_Cq</li>
-<li>CcQQ &lt;- freq_CQ* freq_cQ*2</li>
-<li>CcQq &lt;- freq_CQ* freq_cq* 2 + freq_Cq* freq_cQ*2</li>
-<li>Ccqq &lt;- freq_Cq* freq_cq*2</li>
-<li>ccQQ &lt;- freq_cQ* freq_cQ</li>
-<li>ccQq &lt;- freq_cQ* freq_cq*2</li>
-<li>ccqq &lt;- freq_cq*freq_cq</li>
-</ul>
-<p>If we select only the lines with CC marker scores, the expected
-genotypic value would be as follows:</p>
-<ul>
-<li>Expected Value = CCQQ* 5 + CCQq* 0 + CCqq* -5 or</li>
-<li>Expected Value = (0.5* (1-rc))* (0.5* (1-rc))* 5 + (0.5* rc)(0.5*
-rc)* (-5)</li>
-<li>Expected Value = (5)(0.25rc^2 -0.5rc+0.25) + (-5)(0.25rc^2)</li>
-<li>Expected Value = 1.25rc^2 -2.5rc+1.25-1.25rc^2</li>
-<li>Expected Value = -2.5rc+1.25</li>
-</ul>
-<pre class="r"><code>rc &lt;- (AABB_e-1.25) / (-2.5)
-print(rc)</code></pre>
-<pre><code>[1] 0.419</code></pre>
 <div
-id="answer-a-marker-would-need-to-have-a-recombination-frequency-between-itself-and-the-qtl-of-0.419-for-the-selected-lines-to-have-the-same-expected-value-as-the-lines-selected-with-our-flanking-markers"
+id="ibd-represents-the-probability-that-the-same-allele-is-inherited-by-two-individuals-from-some-common-ancestor."
 class="section level3">
-<h3>Answer: A marker would need to have a recombination frequency
-between itself and the QTL of 0.419 for the selected lines to have the
-same expected value as the lines selected with our flanking markers</h3>
+<h3>- IBD represents the probability that the same allele is inherited
+by two individuals from some common ancestor.</h3>
+</div>
+<div id="these-calculations-can-be-done-using-pedigrees-or-genotypes"
+class="section level3">
+<h3>- These calculations can be done using pedigrees or genotypes</h3>
+</div>
+</div>
+<div id="a-simple-illustration" class="section level2">
+<h2>A simple illustration</h2>
+<div
+id="in-this-exmple-we-are-testing-lines-from-2-unrelated-full-sib-families.-the-code-below-will-simulate-a-polygenetic-trait-and-compare-prediction-accuracy-using-a-model-that-ignores-genetic-relationships-and-a-mixed-model-that-accounts-for-the-relationships.-you-will-need-to-download-and-install-the-package-mass"
+class="section level3">
+<h3>In this exmple we are testing lines from 2 unrelated full sib
+families. The code below will simulate a polygenetic trait and compare
+prediction accuracy using a model that ignores genetic relationships and
+a mixed model that accounts for the relationships. <strong><em>you will
+need to download and install the package MASS</em></strong></h3>
+<p>##Setting up parameters</p>
+<pre class="r"><code>library(MASS)
+library(here)</code></pre>
+<pre><code>here() starts at /Users/tm639/Documents/Github/PLBRG_7170</code></pre>
+<pre class="r"><code>here::i_am(&quot;analysis/Lab_5.Rmd&quot;)</code></pre>
+<pre><code>here() starts at /Users/tm639/Documents/Github/PLBRG_7170</code></pre>
+<pre class="r"><code>#setting variety and residual variance
+VarA=75
+VarE=25
+#mean of the families relative to the overall mean
+meanFam=c(rep(-5,15),rep(5,15))</code></pre>
+</div>
+</div>
+<div id="generating-relationship-matrix" class="section level2">
+<h2>Generating relationship matrix</h2>
+<pre class="r"><code>source(here::here(&quot;code/Simulate_and_Solve.R&quot;))
+# this is the expected relationship matrix for to unrelated full-sib families
+# there is a total of 30 lines, 15 lines in each family
+#initializing a 30 x 30 matrix with all values = 0
+A=matrix(0,30,30)
+#creating a block of .5 for family 1
+A[1:15,1:15]=.5
+#creating a block of .5 for family 2
+A[16:30,16:30]=.5
+#setting the diagonal to 1
+diag(A)&lt;-1
+print(&quot;A matrix&quot;)</code></pre>
+<pre><code>[1] &quot;A matrix&quot;</code></pre>
+<pre class="r"><code>image(A)</code></pre>
+<p><img src="figure/Lab_5.Rmd/Relationship%20Matirx-1.png" width="672" style="display: block; margin: auto;" />
+## Simulate Breeding Values</p>
+<pre class="r"><code>set.seed(35783948)
+# sampling 30 variety effects
+# now we are sampling from mvnorm since the variety effects are no longer iid
+BV=MASS::mvrnorm(1,meanFam,VarA*A)
+
+sol=simulate_and_solve(BV,A,VarA,VarE)
+# LSM - Least squares means
+# MM - BLUPs from the mixed model
+sol</code></pre>
+<pre><code>            LSM        MM
+ [1,]  88.07296  89.49569
+ [2,]  95.88636  95.35574
+ [3,]  83.62355  86.15863
+ [4,] 102.11244 100.02530
+ [5,] 103.33145 100.93956
+ [6,] 101.57676  99.62354
+ [7,]  84.72632  86.98571
+ [8,]  85.26471  87.38950
+ [9,]  80.14345  83.54856
+[10,] 103.85069 101.32899
+[11,]  93.64864  93.67745
+[12,]  95.57741  95.12403
+[13,]  98.69429  97.46169
+[14,]  98.20998  97.09846
+[15,]  84.78968  87.03323
+[16,] 105.81386 105.40746
+[17,]  99.69822 100.82072
+[18,]  85.53873  90.20111
+[19,] 101.17771 101.93034
+[20,] 109.05235 107.83632
+[21,] 107.32753 106.54271
+[22,]  96.53493  98.44825
+[23,] 106.48451 105.91044
+[24,]  99.41262 100.60652
+[25,] 116.75780 113.61541
+[26,] 109.33145 108.04564
+[27,] 110.52786 108.94295
+[28,] 102.91533 103.23355
+[29,] 113.32767 111.04281
+[30,] 105.87243 105.45138</code></pre>
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<p>1)Conduct the following simulations using a difference in mean
+performance between the two families of 10.</p>
+<p>A.(1 pt) Use VarA = 75 and VarE = 25 (heritability = .75). Change the
+seeds and run the simulation 5 times - Calculate the correlations
+between LSM and the true BV - Calculate the correlations between MM and
+the true BV - Plot the BLUPs against LSM</p>
+<pre class="r"><code>corLSM_BV &lt;- c()
+corMM_BV &lt;- c()
+
+VarA=75
+VarE=25
+iterations &lt;- 5
+
+starting_seed=1234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions &lt;- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV[i] &lt;- cor(solutions[,&quot;LSM&quot;],BV)
+  corMM_BV[i] &lt;- cor(solutions[,&quot;MM&quot;],BV)
+  plot(solutions[,&quot;MM&quot;],solutions[,&quot;LSM&quot;], main=&quot;BLUPs vs LSM estimates&quot;, sub = paste(&quot;Iteration:&quot;,i, sep = &quot;&quot;))
+}</code></pre>
+<p><img src="figure/Lab_5.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-1-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-1-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-1-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-1-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>mean(corLSM_BV)</code></pre>
+<pre><code>[1] 0.9116239</code></pre>
+<pre class="r"><code>mean(corMM_BV)</code></pre>
+<pre><code>[1] 0.9214164</code></pre>
+<p>B.(1 pt) Use VarA = 50 and VarE = 50 (heritability = .5). Change the
+seeds and run the simulation 5 times - calculate the correlations
+between LSM and the true BV - calculate the correlations between MM and
+the true BV - Plot the BLUPs against LSM</p>
+<pre class="r"><code>corLSM_BV_2 &lt;- c()
+corMM_BV_2 &lt;- c()
+
+VarA=50
+VarE=50
+iterations &lt;- 5
+
+starting_seed=2234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions &lt;- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV_2[i] &lt;- cor(solutions[,&quot;LSM&quot;],BV)
+  corMM_BV_2[i] &lt;- cor(solutions[,&quot;MM&quot;],BV)
+  plot(solutions[,&quot;MM&quot;],solutions[,&quot;LSM&quot;], main=&quot;BLUPs vs LSM estimates&quot;, sub = paste(&quot;Iteration:&quot;,i, sep = &quot;&quot;))
+}</code></pre>
+<p><img src="figure/Lab_5.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-2-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-2-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>mean(corLSM_BV_2)</code></pre>
+<pre><code>[1] 0.8644865</code></pre>
+<pre class="r"><code>mean(corMM_BV_2)</code></pre>
+<pre><code>[1] 0.8818306</code></pre>
+<p>C.(1 pt) Use VarA = 25 and VarE = 75 (heritability = .25). Change the
+seeds and run the simulation 5 times - Calculate the correlations
+between LSM and the true BV - Calculate the correlations between MM and
+the true BV - Plot the BLUPs against LSM</p>
+<pre class="r"><code>corLSM_BV_3 &lt;- c()
+corMM_BV_3 &lt;- c()
+
+VarA=25
+VarE=75
+iterations &lt;- 5
+
+starting_seed=3234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions &lt;- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV_3[i] &lt;- cor(solutions[,&quot;LSM&quot;],BV)
+  corMM_BV_3[i] &lt;- cor(solutions[,&quot;MM&quot;],BV)
+  plot(solutions[,&quot;MM&quot;],solutions[,&quot;LSM&quot;], main=&quot;BLUPs vs LSM estimates&quot;, sub = paste(&quot;Iteration:&quot;,i, sep = &quot;&quot;))
+}</code></pre>
+<p><img src="figure/Lab_5.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-3-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-3-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-3-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>mean(corLSM_BV_3)</code></pre>
+<pre><code>[1] 0.6422445</code></pre>
+<pre class="r"><code>mean(corMM_BV_3)</code></pre>
+<pre><code>[1] 0.7843616</code></pre>
+<p>D. (1 pt) What trends do you see in the plots of the BLUPS versus
+LSM? What would be causing this pattern?</p>
+<p>When the heritability is high, the distributions for the estimated
+breeding values of the two full-sib families are near each other. As the
+trait becomes less heritable, the block effects between the observations
+has a larger impact on the estimates, which leads to these two
+distributions emerging.</p>
+<p>E. (1 pt) How does heritability impact the relative performance BLUPs
+and LSM in terms of accuracy (correlations to the true BV)? Why?</p>
+<p>The change in heritability had a larger relative impact on the LSM
+estimates rather than the BLUP estimates. The mean LSM estimates are
+based only on the average values and as the additive variance decreases
+relative to error variance, these estimates are based on lots of noise.
+The BLUP estimates use related individuals to inform estimates, which
+can estimate through the noise of the error variance.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Change the difference in mean performance between families to
+5.</li>
+</ol>
+<ol style="list-style-type: upper-alpha">
+<li>(3 pts) Repeat the simulations in outlined in (1A-1C)</li>
+</ol>
+<pre class="r"><code>corLSM_BV &lt;- c()
+corMM_BV &lt;- c()
+
+VarA=75
+VarE=25
+iterations &lt;- 5
+
+starting_seed=1234
+for(i in 1:iterations){
+  set.seed(starting_seed+i)
+  BV=MASS::mvrnorm(1,meanFam,VarA*A)
+  solutions &lt;- simulate_and_solve(BV,A,VarA,VarE)
+  corLSM_BV[i] &lt;- cor(solutions[,&quot;LSM&quot;],BV)
+  corMM_BV[i] &lt;- cor(solutions[,&quot;MM&quot;],BV)
+  plot(solutions[,&quot;MM&quot;],solutions[,&quot;LSM&quot;], main=&quot;BLUPs vs LSM estimates&quot;, sub = paste(&quot;Iteration:&quot;,i, sep = &quot;&quot;))
+}</code></pre>
+<p><img src="figure/Lab_5.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-4-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab_5.Rmd/unnamed-chunk-4-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>mean(corLSM_BV)</code></pre>
+<pre><code>[1] 0.9211714</code></pre>
+<pre class="r"><code>mean(corMM_BV)</code></pre>
+<pre><code>[1] 0.9288661</code></pre>
+<ol start="2" style="list-style-type: upper-alpha">
+<li>(1 pt) How did the change in the difference in mean performance
+between families impact the relative performance of BLUPs and LSM?
+Why?</li>
+</ol>
+<p>(1 point for turning in the assignment on time)</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -916,19 +858,19 @@ tzcode source: internal
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] here_1.0.1  MASS_7.3-61
+
 loaded via a namespace (and not attached):
  [1] vctrs_0.6.5       cli_3.6.3         knitr_1.49        rlang_1.1.4      
  [5] xfun_0.49         stringi_1.8.4     promises_1.3.2    jsonlite_1.8.9   
  [9] workflowr_1.7.1   glue_1.8.0        rprojroot_2.0.4   git2r_0.35.0     
 [13] htmltools_0.5.8.1 httpuv_1.6.15     sass_0.4.9        rmarkdown_2.29   
 [17] evaluate_1.0.1    jquerylib_0.1.4   tibble_3.2.1      fastmap_1.2.0    
-[21] yaml_2.3.10       lifecycle_1.0.4   whisker_0.4.1     stringr_1.5.1    
-[25] compiler_4.4.1    fs_1.6.5          Rcpp_1.0.13-1     pkgconfig_2.0.3  
-[29] rstudioapi_0.17.1 later_1.4.1       digest_0.6.37     R6_2.5.1         
-[33] pillar_1.10.0     magrittr_2.0.3    bslib_0.8.0       tools_4.4.1      
-[37] cachem_1.1.0     </code></pre>
-</div>
-</div>
+[21] yaml_2.3.10       lifecycle_1.0.4   stringr_1.5.1     compiler_4.4.1   
+[25] fs_1.6.5          Rcpp_1.0.13-1     pkgconfig_2.0.3   rstudioapi_0.17.1
+[29] later_1.4.1       digest_0.6.37     R6_2.5.1          pillar_1.10.0    
+[33] magrittr_2.0.3    bslib_0.8.0       tools_4.4.1       cachem_1.1.0     </code></pre>
 </div>
 </div>
 </div>

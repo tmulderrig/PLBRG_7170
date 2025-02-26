@@ -1,8 +1,8 @@
 ---
 title: "Reproducible scripting, AlphaSimR, Homework"
 author: 
-  name: "Jean-Luc Jannink"
-  affiliation: "USDA-ARS / Cornell"
+  name: "Tim Mulderrig"
+  affiliation: 
 date: "February 4, 2025"
 output:
   html_document:

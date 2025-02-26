@@ -1,0 +1,486 @@
+---
+title: "Data for Breeding Value"
+author: 
+  name: "Tim Mulderrig"
+  affiliation: 
+date: "February 11, 2025"
+output:
+  html_document:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 12
+    highlight: haddock
+    theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
+      toc_depth: 2
+editor_options: 
+  chunk_output_type: console
+---
+  
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+knitr::opts_chunk$set(message=FALSE)
+knitr::opts_chunk$set(cache=FALSE)
+knitr::opts_chunk$set(tidy=TRUE)
+knitr::opts_chunk$set(results="hold")
+knitr::opts_chunk$set(collapse=TRUE)
+knitr::opts_chunk$set(fig.show="hold")
+knitr::opts_chunk$set(tidy.opts = list(wrap=FALSE))
+```
+
+## Objectives
+We will be using `AlphaSimR` to  
+* Simulate datasets to test statistical genetic analysis methods  
+* Simulate whole breeding programs in view of optimizing them  
+
+Example code to work with `AlphaSimR` to  
+1. Create a population and get breeding values from `AlphaSimR` and from an 
+"experiment"  
+2. Prepare a data structure for breeding records that will be useful for 
+simulation.  
+3. Use this data structure in simple linear model analyses.  
+
+### Reproducibility  
+Here is the [README file](./README.md) for this report  
+
+### Script setup  
+Install packages, start the README.md, set the random seed.  
+Hiding all this because you have seen it before.  
+```{r Script setup, echo=FALSE, results="hide"}
+ip <- installed.packages()
+packages_used <- c("AlphaSimR", "tidyverse", "workflowr", "here")
+ip <- installed.packages()
+all_packages_installed <- TRUE
+for (package in packages_used){
+  if (!(package %in% ip[,"Package"])){
+    print(paste("Please install package", package))
+    all_packages_installed <- FALSE
+  }
+}#END packages_used
+if (!all_packages_installed) stop("Need to install packages")
+
+library(tidyverse)
+
+here::i_am("analysis/Lab4_DataForBreedingValue.Rmd")
+
+source(here::here("code","addToREADME.R"))
+addToREADME(paste0("## ", rmarkdown::metadata$title), append=F)
+addToREADME(c(date(), ""))
+
+packages_info <- ip[packages_used, c("Package", "Version", "Built")]
+addToREADME(c("The packages used in this script are:", 
+              "Package, Version, Built"))
+apply(packages_info, 1, function(vec) addToREADME(paste(vec, collapse=" ")))
+addToREADME("")
+
+random_seed <- 45678
+set.seed(random_seed)
+addToREADME(paste("The random seed is", random_seed))
+```
+
+### Script parameters  
+```{r script parameters}
+nFounders <- 100
+nChr <- 7
+segSites <- 140
+nQTL <- 100
+```
+```{r script parameters to README, echo=FALSE, results="hide"}
+addToREADME(c(
+  paste("Number of founders ", nFounders), 
+  paste("Number of chromosomes ", nChr), 
+  paste("Number of QTL per chromosome", nQTL),
+  paste("Number of segregating sites per chromosome", segSites), "")
+)
+```
+
+## Genotypic value versus breeding value  
+By default, the additive genetic variance among founders will be 1.
+Here are a couple of `AlphaSimR` genetic models with non-additive gene action. `addTraitAD` gives an additive + dominance gene action. Each locus has its own dominance deviation and there is a variance of it among loci:  
+$dd \sim N(meanDD, varDD)$  
+`addTraitADE` adds pairwise additive by additive epistasis.  
+```{r Compare breeding value to genotypic value}
+# Create haplotypes for founder population of outbred individuals
+founderHaps <- AlphaSimR::runMacs(nInd=nFounders, nChr=nChr, segSites=segSites)
+# Setup the genotype to phenotype mapping
+SP <- AlphaSimR::SimParam$new(founderHaps)
+meanDD <- 0.4
+varDD <- 0.04
+
+# Additive and dominance model
+SP$addTraitAD(nQtlPerChr=nQTL, meanDD=meanDD, varDD=varDD)
+
+# Create a new population of founders
+founders <- AlphaSimR::newPop(founderHaps, simParam=SP)
+
+# Compare genotypic and breeding values
+corBVGV <- cor(AlphaSimR::gv(founders), AlphaSimR::bv(founders)) %>% round(3)
+plot(AlphaSimR::gv(founders), AlphaSimR::bv(founders), pch=16, 
+     xlab="Genotypic value", ylab="Breeding value", 
+     main=paste0("BV vs GV: AD model, cor=", corBVGV), 
+     cex.axis=1.3, cex.lab=1.3)
+
+# Additive dominance and epistasis model
+# "the relative value of additive-by-additive variance 
+# compared to additive variance"
+SP <- AlphaSimR::SimParam$new(founderHaps)
+relAA <- 0.5
+SP$addTraitADE(nQtlPerChr=nQTL, meanDD=meanDD, varDD=varDD, relAA=relAA)
+
+# Create a new population of founders
+founders <- AlphaSimR::newPop(founderHaps, simParam=SP)
+
+# Compare genotypic and breeding values
+corBVGV <- cor(AlphaSimR::gv(founders), AlphaSimR::bv(founders)) %>% round(3)
+plot(AlphaSimR::gv(founders), AlphaSimR::bv(founders), pch=16, 
+     xlab="Genotypic value", ylab="Breeding value", 
+     main=paste0("BV vs GV: ADE model, cor=", corBVGV), 
+     cex.axis=1.3, cex.lab=1.3)
+```
+```{r Compare breeding value to genotypic value to README, echo=FALSE, results="hide"}
+addToREADME(c("Chunk Compare breeding value to genotypic value",
+              paste("Dominance degree mean", meanDD),
+              paste("Dominance degree variance", varDD),
+              paste("Relative AxA variance", relAA), "")
+            )
+```
+
+## Estimated versus analytical breeding value  
+Estimating the breeding value by a progeny test.  
+In practice, the BV can't be observed.  A progeny test calculates the average
+deviation from the population mean of progeny from randomly mating an individual
+to the population: 2 * mean(progeny pheno - pop mean)  
+```{r Estimate breeding value}
+# Error variance for phenotypic evaluations
+varE <- 1
+# Number of progeny for breeding value estimation
+nProgeny1 <- 5
+nProgeny2 <- 50
+
+# Estimate breeding values  
+# ind is the individual whose breeding value you want to estimate  
+# pop is the population that individual is in  
+# nProgeny is the number of progeny for the test  
+# varE is the error variance with which phenotypes are evaluated
+#      if the genotypic variance is 1 then varE=1 will give h2 = 0.5
+estimateBV <- function(ind, pop, nProgeny, varE=1){
+  # I'm going to cheat a little and assume we know the population mean exactly
+  popMean <- AlphaSimR::gv(pop) %>% mean
+  # Set up crossPlan to cross ind to random others nProgeny times
+  crossPlan <- cbind(ind, sample(AlphaSimR::nInd(pop), nProgeny, replace=T))
+  progeny <- AlphaSimR::makeCross(pop, crossPlan)
+  progPheno <- AlphaSimR::setPheno(progeny, varE=varE, onlyPheno=T)
+  return(2*(mean(progPheno) - popMean))
+}
+
+# estimate BV with a progeny test of nProgeny1
+estimatedBV <- sapply(1:AlphaSimR::nInd(founders), estimateBV, 
+                      pop=founders, nProgeny=nProgeny1, varE=varE)
+# Compare estimated and analytical breeding values
+plot(estimatedBV, AlphaSimR::bv(founders), pch=16, 
+     xlab="Estimated value", ylab="Analytical value", 
+     main=paste("Breeding value estimated from", nProgeny1, "Progeny"))
+
+# estimate BV with a progeny test of nProgeny2
+estimatedBV <- sapply(1:AlphaSimR::nInd(founders), estimateBV, 
+                      pop=founders, nProgeny=nProgeny2, varE=varE)
+# Compare estimated and analytical breeding values
+plot(estimatedBV, AlphaSimR::bv(founders), pch=16, 
+     xlab="Estimated value", ylab="Analytical value", 
+     main=paste("Breeding value estimated from", nProgeny2, "Progeny"))
+```
+```{r Estimate breeding value to README, echo=FALSE, results="hide"}
+addToREADME(c("Chunk Estimate breeding value",
+              paste("Phenotypic evaluation with varE", varE),
+              paste("Number of progeny for first BV estimate", nProgeny1),
+              paste("Number of progeny for first BV estimate", nProgeny2), ""
+              )
+            )
+```
+
+## Round robin crossing design  
+This is a simple design that ensures that all parents get used equally  
+```{r Round robin}
+makeRoundRobin <- function(pop, makeRandom=F){
+  nInd <- AlphaSimR::nInd(pop)
+  parOrder <- 1:nInd
+  if (makeRandom) parOrder <- sample(parOrder)
+  return(cbind(parOrder, parOrder[c(2:nInd, 1)]))
+}
+
+# Make a bunch of new lines
+crossPlan <- makeRoundRobin(founders)
+exptLines <- AlphaSimR::makeCross(founders, crossPlan)
+
+cbind(exptLines@id, exptLines@mother, exptLines@father) %>% head
+```
+
+## `records` data structure  
+`AlphaSimR` populations only retain phenotypes of the most recent evaluation. 
+In plant breeding, it is common to evaluate the same line more than once, 
+and it makes sense to include all of those phenotypes in downstream analyses.
+Here, I propose a simple tibble to retain phenotypic records.  
+
+### Set up records
+The columns are the individual `id`, its seed parent id `seedPar`, its pollen 
+parent id `pollenPar`, its observed phenotype `pheno`, and the error variance 
+of that observed phenotype `varE`  
+```{r Set up records}
+nInd <- 100
+varE <- 1
+# Function to make a simple data structure out of a population
+# AlphaSimR doesn't retain varE once you have setPheno, so supply it
+makeRecFromPop <- function(pop, varE=1){
+  dplyr::tibble(id=pop@id,
+                seedPar=pop@mother,
+                pollenPar=pop@father,
+                pheno=AlphaSimR::pheno(pop),
+                varE=varE)
+}
+
+# Run a phenotyping experiment and populate the `records` data structure
+exptLines <- AlphaSimR::setPheno(exptLines, varE=varE, simParam=SP)
+records <- makeRecFromPop(exptLines, varE=varE)
+head(records)
+
+# Compare genotypic and phenotypic values
+corPhGV <- cor(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines)) %>%
+  round(3)
+plot(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines), pch=16, 
+     xlab="Genetic value", ylab="Phenotype", 
+     main=paste0("First Evaluation, cor=", corPhGV))
+
+# Second evaluation
+exptLines <- AlphaSimR::setPheno(exptLines, varE=varE, simParam=SP)
+# Add the new records to the old ones
+records <- dplyr::bind_rows(records, makeRecFromPop(exptLines, varE=varE))
+
+# Compare genotypic and phenotypic values
+corPhGV <- cor(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines)) %>%
+  round(3)
+plot(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines), pch=16, 
+     xlab="Genetic value", ylab="Phenotype", 
+     main=paste0("Second Evaluation, cor=", corPhGV))
+```
+```{r Set up records to README, echo=FALSE, results="hide"}
+addToREADME(c("Chunk Set up records",
+              paste("Number of lines", nInd),
+              paste("Error variance", varE)
+              )
+            )
+```
+
+## Use records to estimate genotypic value from >1 observation
+```{r Linear model estimation}
+# BASIC LINEAR MODEL
+lmEstGV <- lm(pheno ~ -1 + id, data=records)
+gvEstimates <- coefficients(lmEstGV)
+
+# Compare genotypic and **Combined** phenotypic values
+corEstGV <- cor(AlphaSimR::gv(exptLines), gvEstimates) %>%
+  round(3)
+plot(AlphaSimR::gv(exptLines), gvEstimates, pch=16, 
+     xlab="Genetic value", ylab="Phenotype", 
+     main=paste0("Both Evaluations, cor=", corEstGV))
+```
+
+## Use records in two-stage selection
+In plant breeding there is often a preliminary evaluation stage, then a
+more advanced stage.  We can use the records to keep track of these stages.
+```{r Two stage selection}
+nIndStage1 <- 400
+nIndStage2 <- 100
+varEstage1 <- 4
+varEstage2 <- 1
+
+progenyPerCross <- nIndStage1 / nrow(crossPlan)
+# The production pipeline starts with a bunch of new lines
+exptLines <- AlphaSimR::makeCross(founders, crossPlan, 
+                                  nProgeny=progenyPerCross)
+
+# Phenotypic evaluation of experimental lines
+exptLines <- AlphaSimR::setPheno(exptLines, varE=varEstage1, simParam=SP)
+records <- makeRecFromPop(exptLines, varE=varEstage1)
+
+# Select among lines to advance to Stage 2
+keep <- AlphaSimR::pheno(exptLines) %>% 
+  order(decreasing=T) %>% .[1:nIndStage2]
+
+# Phenotypic evaluation of Stage 2 lines
+stage2Lines <- exptLines[keep]
+stage2Lines <- AlphaSimR::setPheno(stage2Lines, varE=varEstage2, simParam=SP)
+records <- dplyr::bind_rows(records, makeRecFromPop(stage2Lines,
+                                                    varE=varEstage2))
+
+str(records)
+```
+```{r Two stage selection to README, echo=FALSE, results="hide"}
+addToREADME(c("Two-stage selection",
+              paste("Number of Stage 1 lines", nIndStage1),
+              paste("Number of Stage 2 lines", nIndStage2),
+              paste("Error variance for Stage 1", varEstage1),
+              paste("Error variance for Stage 2", varEstage2), ""
+              )
+            )
+```
+
+## Estimate gain from selection four ways
+This little section is mostly to illustrate that `AlphaSimR` thinks of 
+breeding values *relative to the population mean*, but of genotypic values in
+*absolute* terms.  
+```{r Estimate gain from selection}
+print("Gain from selection on BV where the reference pop is stage2Lines")
+print(paste("Gain from selection", 
+            round(mean(AlphaSimR::bv(stage2Lines)) -
+                  mean(AlphaSimR::bv(exptLines)), 2)))
+
+print("Gain from selection on BV where the reference pop is all exptLines")
+print(paste("Gain from selection", 
+            round(mean(AlphaSimR::bv(exptLines)[keep]) - 
+                  mean(AlphaSimR::bv(exptLines)), 2)))
+
+print("Gain from selection on **GV** where the reference pop is stage2Lines")
+print(paste("Gain from selection", 
+            round(mean(AlphaSimR::gv(stage2Lines)) - 
+                  mean(AlphaSimR::gv(exptLines)), 2)))
+
+print("Gain from selection on **GV** where the reference pop is all exptLines")
+print(paste("Gain from selection", 
+            round(mean(AlphaSimR::gv(exptLines)[keep]) - 
+                  mean(AlphaSimR::gv(exptLines)), 2)))
+```
+
+## Homework  
+1. We saw how to write a function to estimate breeding values by doing a progeny
+test (chunk `Estimate breeding value`). Then, in the chunk `Linear model
+estimation`, we used a simple linear model to combine records to estimate the
+genotypic values of individuals (chunk `Linear model estimation`).  
+Tweak the linear model so that it estimates, for example, the breeding 
+values of the seed parent. HINT: this will entail introducing `seedPar` 
+into the model. Use the `exptLines` and their associated `records` from the
+`Two stage selection` chunk.  
+
+```{r}
+lmEstParBV <- lm(pheno~1 + seedPar, data=records)
+```
+
+2. Make plots comparing the breeding values thus obtained to those 
+obtained by the `bv` function or by our own `estimateBV` function. 
+
+```{r}
+corBV_lmBV <- cor(AlphaSimR::bv(founders),lmEstParBV$coefficients)
+plot(AlphaSimR::bv(founders),lmEstParBV$coefficients)
+```
+
+3. The `lm` function from the `stats` package can account for observations with
+different weights. Weights should be the inverse of the error variance for the
+observation. Handily, we keep that error variance in the `records` tibble.
+Again, tweak the linear model and use the records from the `Two stage selection`
+chunk to account for the different error variances from Stage 1 versus Stage 2
+when you estimate the genotypic values for individuals.  
+
+```{r}
+lmEstParBV_wgtd <- lm(pheno~1+seedPar, weights=1/varE, data=records)
+```
+
+4. Correlate the genotypic values obtained with or without weighting to the
+simulated values obtained by the `AlphaSimR::gv` function.  
+
+```{r}
+cor(AlphaSimR::gv(founders), lmEstParBV$coefficients)
+cor(AlphaSimR::gv(founders), lmEstParBV_wgtd$coefficients)
+```
+
+5. *BONUS* for everyone: There is random error associated with all of these
+simulations. If you want to see how the breeding value from the linear model
+compares with the `estimateBV` function, or how weighted versus unweighted
+estimates of genotypic value correlate to the truth, you will have to do each
+analysis multiple times and get means and standard deviations.  
+```{r}
+iterations <- 1000
+nIndStage1 <- 400
+nIndStage2 <- 100
+varEstage1 <- .4
+varEstage2 <- .1
+progenyPerCross <- nIndStage1 / nrow(crossPlan)
+
+corBV_lmBV_it <- c()
+corBV_lmBV_wgt_it <- c()
+
+for (i in 1:iterations){
+   
+   sim_expt <- AlphaSimR::setPheno(exptLines, varE=varE, simParam=SP)
+    sim_records <- makeRecFromPop(sim_expt, varE=varEstage1)
+    sim_keep <- AlphaSimR::pheno(sim_expt) %>% 
+  order(decreasing=T) %>% .[1:nIndStage2]
+    sim_stage2 <- sim_expt[sim_keep]
+    sim_stage2 <- AlphaSimR::setPheno(sim_stage2, varE=varEstage2, simParam=SP)
+    sim_records <- dplyr::bind_rows(sim_records, makeRecFromPop(sim_stage2,
+                                                    varE=varEstage2))
+    
+    sim_lm <- lm(pheno~1 + seedPar, data=sim_records)
+    corBV_lmBV_it[i] <- cor(AlphaSimR::bv(founders),sim_lm$coefficients)
+    sim_lm_wtg <- lm(pheno~1+seedPar, weights=1/varE, data=sim_records)
+    corBV_lmBV_wgt_it[i] <- cor(AlphaSimR::bv(founders),sim_lm_wtg$coefficients)
+    
+}
+```
+
+
+```{r}
+ggplot(data=as.data.frame(corBV_lmBV_it), aes(x=corBV_lmBV_it))+
+  geom_histogram(bins=20, color="darkgray", fill="beige") +
+  ggtitle("Correlations of lm and bv() estimated breeding values") + 
+  geom_vline(xintercept = mean(corBV_lmBV_it), linewidth=1, color="black")+
+  annotate("text", x=0.2, y=150, label=(paste0("Mean: ", round(mean(corBV_lmBV_it),2))))+
+  annotate("text", x=0.2, y=140, label=(paste0("SD: ", round(sd(corBV_lmBV_it), 2))))+
+  theme_classic()
+
+ggplot(data=as.data.frame(corBV_lmBV_wgt_it), aes(x=corBV_lmBV_wgt_it))+
+  geom_histogram(bins=20, color="darkgray", fill="beige") +
+  ggtitle("Correlations of weighted lm and bv() estimated breeding values") + 
+  geom_vline(xintercept = mean(corBV_lmBV_wgt_it), linewidth=1, color="black")+
+  annotate("text", x=0.2, y=150, label=(paste0("Mean: ", round(mean(corBV_lmBV_wgt_it),2))))+
+  annotate("text", x=0.2, y=140, label=(paste0("SD: ", round(sd(corBV_lmBV_wgt_it), 2))))+
+  theme_classic()
+
+```
+
+
+6. *BONUS* for stat heads.  You could run a linear model with both 
+`seedPar` and `pollenPar` as factors. But that would lead to separate estimates 
+of these effects when in fact the same individuals are both seed and pollen 
+parents.  How could you implement a linear model that would estimate one 
+effect per parent regardless of whether it was a seed or pollen parent?  
+
+```{r}
+pivot_records <- pivot_longer(data=records, cols = c("seedPar","pollenPar"), values_to = "parents")
+pivot_lm <- lm(pheno~1+parents, data=pivot_records)
+cor(AlphaSimR::bv(founders), coefficients(pivot_lm))
+```
+
+
+
+### Homework grading  
+I want to receive a zipped folder with your homework in it one week from today,
+before lab.  Please use the `workflowr` package to create the folder structure.
+You should have created an Rmarkdown script that will create an html file that I
+can look through. So:  
+1. 2 points for sending in a zipped folder on time.  
+2. 2 points for each successful step (1 through 4) from above, with partial
+credit.  
+3. Each BONUS is worth two points.  So you can get >10 points if you want to
+slack off on some other lab.  
+4. I will subtract 0.5 points for every day the homework is late.  

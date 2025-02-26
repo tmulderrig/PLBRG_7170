@@ -1,5 +1,5 @@
-## Reproducible scripting, AlphaSimR, Homework  
-Tue Feb 11 13:26:39 2025  
+## Data for Breeding Value  
+Tue Feb 25 14:03:30 2025  
   
 The packages used in this script are:  
 Package, Version, Built  
@@ -9,11 +9,27 @@ workflowr 1.7.1 4.4.0
 here 1.0.1 4.4.1  
   
 The random seed is 45678  
+Number of founders  100  
+Number of chromosomes  7  
+Number of QTL per chromosome 100  
+Number of segregating sites per chromosome 140  
   
-The number of founders for the simulation is 100  
-The number of chromosomes is 10  
-There are 10 QTL per chromosome  
-There are 1000 segregating sites per chromosome  
-There are 200 F1 progeny  
-There are 200 F2 progeny  
+Chunk Compare breeding value to genotypic value  
+Dominance degree mean 0.4  
+Dominance degree variance 0.04  
+Relative AxA variance 0.5  
+  
+Chunk Estimate breeding value  
+Phenotypic evaluation with varE 1  
+Number of progeny for first BV estimate 5  
+Number of progeny for first BV estimate 50  
+  
+Chunk Set up records  
+Number of lines 100  
+Error variance 1  
+Two-stage selection  
+Number of Stage 1 lines 400  
+Number of Stage 2 lines 100  
+Error variance for Stage 1 4  
+Error variance for Stage 2 1  
   

@@ -1,0 +1,139 @@
+---
+title: "pset2_tpm"
+author: "Timothy Mulderrig"
+date: "2025-02-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Load Libraries and set directory
+```{r}
+library(tidyverse)
+library(here)
+here::i_am("analysis/pset2_tpm.Rmd")
+```
+
+## Question 1
+
+Read in the file "Pedigree.csv" and write an R function to calculate the additive relationships (first calculate the coefficients of coancestry and then multiply by 2 to get the additive relationships) (5 pts)
+
+```{r}
+ped_data <- read_csv(here::here("data/Pedigree.csv"))
+str(ped_data)
+
+coef_coanc_mat <- matrix(data=NA,nrow=nrow(ped_data), ncol = nrow(ped_data))
+
+founders <- ped_data$id[which(ped_data$seedPar==0 & ped_data$pollenPar==0)]
+coef_coanc_mat[1:length(founders),1:length(founders)]=0
+diag(coef_coanc_mat)[founders]=0.5
+
+for (i in (length(founders) + 1):nrow(ped_data)){
+  for (j in 1:(i - 1)){
+    i_seedpar <- as.numeric(ped_data[i,"seedPar", drop=TRUE])
+    i_pollenpar <- as.numeric(ped_data[i,"pollenPar", drop=TRUE])
+    fdv <- coef_coanc_mat[i_pollenpar,j]
+    fsv <- coef_coanc_mat[i_seedpar,j]
+    fuv <- 1/2*(fdv+fsv)
+    coef_coanc_mat[i,j]=fuv
+    coef_coanc_mat[j,i]=fuv
+  }
+  i_seedpar <- as.numeric(ped_data[i,"seedPar", drop=TRUE])
+  i_pollenpar <- as.numeric(ped_data[i,"pollenPar", drop=TRUE])
+  fsd <- coef_coanc_mat[i_seedpar,i_pollenpar]
+  coef_coanc_mat[i,i]= 1/2*(1+fsd)
+}
+
+a_mat <- coef_coanc_mat*2
+```
+
+Check accuracy of a mat compared to provided pedigree matrix
+
+```{r}
+ped_mat <- as.matrix(read_csv(here::here("data/Pedigree_Rel.csv")))
+ped_mat <- ped_mat[,2:41]
+  
+sum(a_mat-ped_mat)
+```
+These matrices are the same!
+
+## Question 2
+
+Read in the file "SNP_data.csv" and write an R function to calculate the genomic relationship matrix. (5 pts)
+
+```{r}
+snp_data <- read_csv(here::here("data/SNP_data.csv"))
+snp_data <- snp_data[,2:ncol(snp_data)]
+## Center marker scores on each marker mean
+z <- as.matrix(apply(snp_data, 2, function(col) col-mean(col)))
+## Calculate p and 1-p for each marker
+MAF <- function(snp_mat){
+  pm <- c()
+  for (i in 1:ncol(snp_mat)){
+    ref_allele <- (sum(snp_mat[,i]==0)*2+sum(snp_mat[,i]==1))/(nrow(snp_mat)*2)
+    alt_allele <- (sum(snp_mat[,i]==2)*2+sum(snp_mat[,i]==1))/(nrow(snp_mat)*2)
+    pm[i] <- min(c(ref_allele,alt_allele))
+  }
+  return(pm)
+}
+
+p <- MAF(snp_data)
+q <- 1-p
+
+scaling_factor <- 2*sum(p*q)
+  
+G <- z%*%t(z) / scaling_factor
+G <- round(G,9)
+```
+
+Check accuracy of g mat compared to provided GRM matrix
+
+```{r}
+grm <- as.matrix(read_csv(here::here("data/Genomic_Rel.csv")))
+grm <- grm[,2:ncol(grm)]
+grm <- round(grm,9)
+
+sum(G-grm)
+```
+These matrices are the same!
+
+## Question 3
+
+Plot the off diagonals of the pedigree relationship matrix (x-axis) and the genomic relationship matrix (y-axis). Identify at least 1 difference and provide an explanation (2 pts)
+
+```{r}
+offDiag <- function(relMat){
+return(c(relMat[upper.tri(relMat)]))
+}
+plotting_data <- data.frame(x=offDiag(a_mat), y=offDiag(G))
+ggplot(data=plotting_data,aes(x=x, y=y))+
+  geom_point(color="darkgreen") +
+  labs(
+    x="A Matrix",
+    y="G Matrix",
+    title= "Off Diagonals"
+  ) +
+  theme_minimal()
+```
+Once difference that we see between the off-diagonal elements of the A and G matrices are that the A matrix elements take on discrete values where as the element from the G matrix are continuous. This is because the A matrix calculates expectations of coefficients of coancestry based on discrete assumptions of the starting founders having defined relatedness. Those starting assumptions fix discrete expectation values that any indiiduals can take at any level of relatedness. Since the GRM is the realized additive relationship matrix, each value deviates from the expectation, creating continuous values of additive relationship coefficients.
+
+## Question 4
+
+Plot the diagonals of the pedigree relationship matrix (x-axis) and the genomic relationship matrix (y-axis). Identify at least 1 difference and provide an explanation (2 pts)
+
+```{r}
+plotting_data <- data.frame(x=diag(a_mat), y=diag(G))
+ggplot(data=plotting_data,aes(x=x, y=y))+
+  geom_point(color="darkgreen") +
+  labs(
+    x="A Matrix",
+    y="G Matrix",
+    title= "Diagonals"
+  ) +
+  theme_minimal()
+```
+
+One major difference that we see between the diagonals of the A and G matrix diagonals is that in the A matrix, values cannot extend below 0 whereas in the GRM, values dip as low as about 0.69. This is primarily due to the fact that the A matrix does not allow expected values of coefficients of coancestry to extend below 0, wheras in the realized G matrix, these can definitely fall below 0. This leads to negative values of inbreeding coefficients which create diagonal elements in the GRM that are below 1. 

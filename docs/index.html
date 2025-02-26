@@ -281,7 +281,7 @@ $(document).ready(function () {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -292,8 +292,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -302,13 +302,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-11
+<strong>Last updated:</strong> 2025-02-26
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>PLBRG_7170/</code> <span
@@ -331,31 +331,36 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong0e9124f">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170treeba34ff682968aca86fb420fe14b17c214d91cb59targetblankba34ff6a">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 0e9124f
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/tmulderrig/PLBRG_7170/tree/ba34ff682968aca86fb420fe14b17c214d91cb59" target="_blank">ba34ff6</a>
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong0e9124f"
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170treeba34ff682968aca86fb420fe14b17c214d91cb59targetblankba34ff6a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -364,7 +369,8 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 0e9124f.
+The results in this page were generated with repository version
+<a href="https://github.com/tmulderrig/PLBRG_7170/tree/ba34ff682968aca86fb420fe14b17c214d91cb59" target="_blank">ba34ff6</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -383,6 +389,24 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/Lab4_DataForBreedingValue.Rmd
+    Untracked:  analysis/Lab_5.Rmd
+    Untracked:  analysis/pset1_tpm.pdf
+    Untracked:  analysis/pset2_tpm.Rmd
+    Untracked:  code/Simulate_and_Solve.R
+    Untracked:  data/Genomic_Rel.csv
+    Untracked:  data/Pedigree.csv
+    Untracked:  data/Pedigree_Rel.csv
+    Untracked:  data/SNP_data.csv
+
+Unstaged changes:
+    Modified:   analysis/Lab3_ProgrammingAlphaSimR.Rmd
+    Modified:   analysis/index.Rmd
+    Modified:   analysis/lab2_MatrixAlgebra.Rmd
+    Modified:   analysis/pset1_tpm.Rmd
+    Modified:   output/QTLgenotypes.csv
 
 </code></pre>
 <p>
@@ -428,10 +452,27 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/ba34ff682968aca86fb420fe14b17c214d91cb59/docs/index.html" target="_blank">ba34ff6</a>
+</td>
+<td>
+tmulderrig
+</td>
+<td>
+2025-02-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-0e9124f
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/0e9124fb2d06c1dc6b306b54edeba7ff15ef5353/analysis/index.Rmd" target="_blank">0e9124f</a>
 </td>
 <td>
 tmulderrig
@@ -448,7 +489,7 @@ adding lab 3 to home page
 Rmd
 </td>
 <td>
-94da33e
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/94da33e5c9ef5b7a94e5da5c1479cc97c9e4b7f7/analysis/index.Rmd" target="_blank">94da33e</a>
 </td>
 <td>
 tmulderrig
@@ -465,7 +506,7 @@ corrected index file for pset1
 html
 </td>
 <td>
-94da33e
+<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/94da33e5c9ef5b7a94e5da5c1479cc97c9e4b7f7/docs/index.html" target="_blank">94da33e</a>
 </td>
 <td>
 tmulderrig
@@ -482,7 +523,7 @@ corrected index file for pset1
 html
 </td>
 <td>
-6be99b6
+<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/6be99b6e3fb9585c1cb39166aa40dfeab5098356/docs/index.html" target="_blank">6be99b6</a>
 </td>
 <td>
 tmulderrig
@@ -499,7 +540,7 @@ index pset1
 Rmd
 </td>
 <td>
-d567d5a
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/d567d5adfdfcca694af50667f040825ec9005f25/analysis/index.Rmd" target="_blank">d567d5a</a>
 </td>
 <td>
 tmulderrig
@@ -516,7 +557,7 @@ pset 1 on homepage
 Rmd
 </td>
 <td>
-b498291
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/b498291fc0cc4b4afa61f040124bfd51743ba76a/analysis/index.Rmd" target="_blank">b498291</a>
 </td>
 <td>
 tmulderrig
@@ -533,7 +574,7 @@ pset1
 html
 </td>
 <td>
-b498291
+<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/b498291fc0cc4b4afa61f040124bfd51743ba76a/docs/index.html" target="_blank">b498291</a>
 </td>
 <td>
 tmulderrig
@@ -550,7 +591,7 @@ pset1
 Rmd
 </td>
 <td>
-cb3e41b
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/cb3e41b8c7668475a96f3f33a6a5dd372bad6e68/analysis/index.Rmd" target="_blank">cb3e41b</a>
 </td>
 <td>
 tmulderrig
@@ -567,7 +608,7 @@ Lab 1 workflow build manual
 html
 </td>
 <td>
-cb3e41b
+<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/cb3e41b8c7668475a96f3f33a6a5dd372bad6e68/docs/index.html" target="_blank">cb3e41b</a>
 </td>
 <td>
 tmulderrig
@@ -584,7 +625,7 @@ Lab 1 workflow build manual
 Rmd
 </td>
 <td>
-94ff802
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/94ff802457fcc4a794de4b6958ebad25ad94fce2/analysis/index.Rmd" target="_blank">94ff802</a>
 </td>
 <td>
 tmulderrig
@@ -601,7 +642,7 @@ wflow setup and manually commit lab 1 and 2
 html
 </td>
 <td>
-94ff802
+<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/94ff802457fcc4a794de4b6958ebad25ad94fce2/docs/index.html" target="_blank">94ff802</a>
 </td>
 <td>
 tmulderrig
@@ -618,7 +659,7 @@ wflow setup and manually commit lab 1 and 2
 Rmd
 </td>
 <td>
-8b594cd
+<a href="https://github.com/tmulderrig/PLBRG_7170/blob/8b594cd39cf2c91304b3c7f1dd4b92408a736508/analysis/index.Rmd" target="_blank">8b594cd</a>
 </td>
 <td>
 tmulderrig
@@ -642,6 +683,8 @@ Start workflowr project.
 <p><a href="lab2_MatrixAlgebra.html">Lab 2</a></p>
 <p><a href="pset1_tpm.html">Problem Set 1</a></p>
 <p><a href="Lab3_ProgrammingAlphaSimR.html">Lab 3</a></p>
+<p><a href="Lab_DataForBreedingValue.html">Lab 4</a></p>
+<p><a href="pset2_tpm.html">Problem Set 2</a></p>
 </div>
 </div>
 </div>

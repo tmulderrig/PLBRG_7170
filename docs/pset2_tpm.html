@@ -11,9 +11,9 @@
 
 <meta name="author" content="Timothy Mulderrig" />
 
-<meta name="date" content="2025-02-03" />
+<meta name="date" content="2025-02-26" />
 
-<title>Pset 1</title>
+<title>pset2_tpm</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -351,9 +351,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Pset 1</h1>
+<h1 class="title toc-ignore">pset2_tpm</h1>
 <h4 class="author">Timothy Mulderrig</h4>
-<h4 class="date">2025-02-03</h4>
+<h4 class="date">2025-02-26</h4>
 
 </div>
 
@@ -382,7 +382,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-17
+<strong>Last updated:</strong> 2025-02-26
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -420,10 +420,10 @@ changes </a>
 <div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
 <code>wflow_publish</code> to commit the R Markdown file and build the
 HTML.</p>
 </div>
@@ -556,9 +556,18 @@ Ignored files:
 
 Untracked files:
     Untracked:  analysis/Lab4_DataForBreedingValue.Rmd
+    Untracked:  analysis/Lab_5.Rmd
+    Untracked:  analysis/pset1_tpm.pdf
+    Untracked:  analysis/pset2_tpm.Rmd
+    Untracked:  code/Simulate_and_Solve.R
+    Untracked:  data/Genomic_Rel.csv
+    Untracked:  data/Pedigree.csv
+    Untracked:  data/Pedigree_Rel.csv
+    Untracked:  data/SNP_data.csv
 
 Unstaged changes:
     Modified:   analysis/Lab3_ProgrammingAlphaSimR.Rmd
+    Modified:   analysis/index.Rmd
     Modified:   analysis/lab2_MatrixAlgebra.Rmd
     Modified:   analysis/pset1_tpm.Rmd
     Modified:   output/QTLgenotypes.csv
@@ -577,319 +586,202 @@ have uncommitted changes.
 </div>
 <div id="versions" class="tab-pane fade">
 <p>
-These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/pset1_tpm.Rmd</code>) and HTML
-(<code>docs/pset1_tpm.html</code>) files. If you’ve configured a remote
-Git repository (see <code>?wflow_git_remote</code>), click on the
-hyperlinks in the table below to view the files as they were in that
-past version.
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/5d117d57c13991031ba13f135eb8c0cf2ce21264/docs/pset1_tpm.html" target="_blank">5d117d5</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-04
-</td>
-<td>
-lab 3
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/d567d5adfdfcca694af50667f040825ec9005f25/docs/pset1_tpm.html" target="_blank">d567d5a</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-03
-</td>
-<td>
-pset 1 on homepage
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/tmulderrig/PLBRG_7170/blob/b498291fc0cc4b4afa61f040124bfd51743ba76a/analysis/pset1_tpm.Rmd" target="_blank">b498291</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-03
-</td>
-<td>
-pset1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/tmulderrig/PLBRG_7170/b498291fc0cc4b4afa61f040124bfd51743ba76a/docs/pset1_tpm.html" target="_blank">b498291</a>
-</td>
-<td>
-tmulderrig
-</td>
-<td>
-2025-02-03
-</td>
-<td>
-pset1
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
 </div>
-<div id="q1" class="section level1">
-<h1>Q1</h1>
-<p>As a plant breeder I want to fix an allele that provides resistance
-to an important crop disease. Unfortunately, I do not have the ability
-to directly genotype the causative mutation,but I have identified a
-genetic marker that is closely linked the causative mutation. Based on
-mapping experiments the recombination frequency between the marker
-(alleles: A &amp; a) and the QTL (alleles: Q – resistant &amp; q –
-susceptible) is r = .25</p>
-<p>I have crossed a homozygous resistant line to a homozygous
-susceptible line to get an offspring with the genotype: [A/Q] [a/q]</p>
-<p>I will self this individual to generate offspring segregating for
-resistance.</p>
-<div id="a" class="section level2">
-<h2>1A)</h2>
-<p>If I select only lines with the genotype AA, what expected proportion
-of the selected lines that will be homozygous for the favorable QTL
-(QQ)? (2 pts)</p>
-<p>Frequency of possible gametes</p>
-<pre class="r"><code>r=0.25
-freq_AQ &lt;-  (1-r)*0.5
-freq_aq &lt;- (1-r)*0.5
-freq_Aq &lt;- r*(0.5)
-freq_aQ &lt;- r*(0.5)</code></pre>
-<p>Frequency of Genotype combinations in F2</p>
-<pre class="r"><code>#multiply by 2 in cases where unique gametes could originate from the pallen or egg donor
-
-AAQQ &lt;- freq_AQ*freq_AQ
-AAQq &lt;- freq_AQ*freq_Aq*2
-AAqq &lt;- freq_Aq*freq_Aq
-AaQQ &lt;- freq_AQ*freq_aQ*2
-AaQq &lt;- freq_AQ*freq_aq*2 + freq_Aq*freq_aQ*2
-Aaqq &lt;- freq_Aq*freq_aq*2
-aaQQ &lt;- freq_aQ*freq_aQ
-aaQq &lt;- freq_aQ*freq_aq*2
-aaqq &lt;- freq_aq*freq_aq
-
-AAQQ+AAQq+AAqq+AaQQ+AaQq+Aaqq+aaQQ+aaQq+aaqq</code></pre>
-<pre><code>[1] 1</code></pre>
-<p>Selected genotypes</p>
-<pre class="r"><code>sel_genos &lt;- AAQQ + AAQq + AAqq
-QQ_sel &lt;- AAQQ / sel_genos
-print(QQ_sel)</code></pre>
-<pre><code>[1] 0.5625</code></pre>
-<div
-id="answer-the-expected-proportion-of-aa-selected-lines-that-will-be-homozygous-for-the-resistance-qtl-is-56.25."
-class="section level3">
-<h3>Answer: The expected proportion of AA selected lines that will be
-homozygous for the resistance QTL is 56.25%.</h3>
+<div id="load-libraries-and-set-directory" class="section level2">
+<h2>Load Libraries and set directory</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(here)</code></pre>
+<pre><code>here() starts at /Users/tm639/Documents/Github/PLBRG_7170</code></pre>
+<pre class="r"><code>here::i_am(&quot;analysis/pset2_tpm.Rmd&quot;)</code></pre>
+<pre><code>here() starts at /Users/tm639/Documents/Github/PLBRG_7170</code></pre>
 </div>
-</div>
-</div>
-<div id="q2" class="section level1">
-<h1>Q2</h1>
-<p>Similar to Q1 I have identified markers linked to a QTL of interest
-and I now want to practice marker assisted selection to fix the
-favorable allele in a population. In this scenario I have 2 markers
-linked on either side of the QTL. Marker 1 (alleles A, a) has a
-recombination frequency r =.4 with the QTL and Marker 2 (alleles B, b)
-has a recombination frequency r =.3 with the QTL. As before I’ve crossed
-a line that is homozygous for the beneficial allele (Q) and a line that
-is homozygous for the unfavorable allele (q):</p>
-<p>[A/Q/B] x [a/q/b]</p>
-<p>I selfed the heterozygous line above to generate many offspring. The
-QQ genotype has a value of a = 5 for the trait of interest, the
-unfavorable genotype qq has a value of -a = -5 for the trait of
-interest. The trait is additive (no dominance)</p>
-<div id="a-1" class="section level2">
-<h2>2A)</h2>
-<p>As a breeder I want to fix the resistance allele. If I select only
-lines with the genotype AABB, what is the expected proportion of the
-selected lines that will be homozygous for the favorable QTL (QQ)? (2
+<div id="question-1" class="section level2">
+<h2>Question 1</h2>
+<p>Read in the file “Pedigree.csv” and write an R function to calculate
+the additive relationships (first calculate the coefficients of
+coancestry and then multiply by 2 to get the additive relationships) (5
 pts)</p>
-<p>Frequency of possible gametes</p>
-<pre class="r"><code>r1 &lt;- 0.4
-r2 &lt;- 0.3
+<pre class="r"><code>ped_data &lt;- read_csv(here::here(&quot;data/Pedigree.csv&quot;))</code></pre>
+<pre><code>New names:
+Rows: 40 Columns: 4
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; dbl
+(4): ...1, id, seedPar, pollenPar
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...1`</code></pre>
+<pre class="r"><code>str(ped_data)</code></pre>
+<pre><code>spc_tbl_ [40 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ ...1     : num [1:40] 1 2 3 4 5 6 7 8 9 10 ...
+ $ id       : num [1:40] 1 2 3 4 5 6 7 8 9 10 ...
+ $ seedPar  : num [1:40] 0 0 0 0 0 0 0 0 0 0 ...
+ $ pollenPar: num [1:40] 0 0 0 0 0 0 0 0 0 0 ...
+ - attr(*, &quot;spec&quot;)=
+  .. cols(
+  ..   ...1 = col_double(),
+  ..   id = col_double(),
+  ..   seedPar = col_double(),
+  ..   pollenPar = col_double()
+  .. )
+ - attr(*, &quot;problems&quot;)=&lt;externalptr&gt; </code></pre>
+<pre class="r"><code>coef_coanc_mat &lt;- matrix(data=NA,nrow=nrow(ped_data), ncol = nrow(ped_data))
 
-freq_AQB &lt;- 0.5*(1-r1)*(1-r2)
-freq_AQb &lt;- 0.5*(1-r1)*(r2)
-freq_Aqb &lt;- 0.5*(r1)*(1-r2)
-freq_AqB &lt;- 0.5*(r1)*(r2)
-freq_aQB &lt;- 0.5*(r1)*(1-r2)
-freq_aQb &lt;- 0.5*(r1)*(r2)
-freq_aqB &lt;- 0.5*(1-r1)*(r2)
-freq_aqb &lt;- 0.5*(1-r1)*(1-r2)
+founders &lt;- ped_data$id[which(ped_data$seedPar==0 &amp; ped_data$pollenPar==0)]
+coef_coanc_mat[1:length(founders),1:length(founders)]=0
+diag(coef_coanc_mat)[founders]=0.5
 
-freq_AQB + freq_AQb + freq_Aqb + freq_AqB + freq_aQB + freq_aQb + freq_aqB + freq_aqb</code></pre>
-<pre><code>[1] 1</code></pre>
-<p>Frequency of genotypes</p>
-<pre class="r"><code>AAQQBB &lt;- freq_AQB*freq_AQB
-AAQQBb &lt;- freq_AQB*freq_AQb*2
-AAQQbb &lt;- freq_AQb*freq_AQb
-AAQqBB &lt;- freq_AQB*freq_AqB*2
-AAQqBb &lt;- freq_AQB*freq_Aqb*2 + freq_AQb*freq_AqB*2
-AAQqbb &lt;- freq_AQb*freq_Aqb*2
-AAqqBB &lt;- freq_AqB*freq_AqB
-AAqqBb &lt;- freq_AqB*freq_Aqb*2
-AAqqbb &lt;- freq_Aqb*freq_Aqb
-AaQQBB &lt;- freq_AQB*freq_aQB*2 
-AaQQBb &lt;- freq_AQB*freq_aQb*2 + freq_AQb*freq_aQB*2
-AaQQbb &lt;- freq_AQb*freq_aQb*2
-AaQqBB &lt;- freq_AQB*freq_aqB*2 + freq_AqB*freq_aQB*2
-AaQqBb &lt;- freq_AQB*freq_aqb*2 + freq_AQb*freq_aqB*2 + freq_Aqb*freq_aQB*2 + freq_aQb*freq_AqB*2
-AaQqbb &lt;- freq_AQb*freq_aqb*2 + freq_Aqb*freq_aQb*2
-AaqqBB &lt;- freq_AqB*freq_aqB*2
-AaqqBb &lt;- freq_AqB*freq_aqb*2 + freq_aqB*freq_Aqb*2
-Aaqqbb &lt;- freq_Aqb*freq_aqb*2
-aaQQBB &lt;- freq_aQB*freq_aQB
-aaQQBb &lt;- freq_aQB*freq_aQb*2
-aaQQbb &lt;- freq_aQb*freq_aQb
-aaQqBB &lt;- freq_aQB*freq_aqB*2
-aaQqBb &lt;- freq_aQB*freq_aqb*2+freq_aQb*freq_aqB*2
-aaQqbb &lt;- freq_aQb*freq_aqb*2
-aaqqBB &lt;- freq_aqB*freq_aqB
-aaqqBb &lt;- freq_aqB*freq_aqb*2
-aaqqbb &lt;- freq_aqb*freq_aqb
+for (i in (length(founders) + 1):nrow(ped_data)){
+  for (j in 1:(i - 1)){
+    i_seedpar &lt;- as.numeric(ped_data[i,&quot;seedPar&quot;, drop=TRUE])
+    i_pollenpar &lt;- as.numeric(ped_data[i,&quot;pollenPar&quot;, drop=TRUE])
+    fdv &lt;- coef_coanc_mat[i_pollenpar,j]
+    fsv &lt;- coef_coanc_mat[i_seedpar,j]
+    fuv &lt;- 1/2*(fdv+fsv)
+    coef_coanc_mat[i,j]=fuv
+    coef_coanc_mat[j,i]=fuv
+  }
+  i_seedpar &lt;- as.numeric(ped_data[i,&quot;seedPar&quot;, drop=TRUE])
+  i_pollenpar &lt;- as.numeric(ped_data[i,&quot;pollenPar&quot;, drop=TRUE])
+  fsd &lt;- coef_coanc_mat[i_seedpar,i_pollenpar]
+  coef_coanc_mat[i,i]= 1/2*(1+fsd)
+}
 
-sum(c(AAQQBB, AAQQBb, AAQQbb, AAQqBB, AAQqBb, AAQqbb, AAqqBB, AAqqBb, AAqqbb, 
-  AaQQBB, AaQQBb, AaQQbb, AaQqBB, AaQqBb, AaQqbb, AaqqBB, AaqqBb, Aaqqbb, 
-  aaQQBB, aaQQBb, aaQQbb, aaQqBB, aaQqBb, aaQqbb, aaqqBB, aaqqBb, aaqqbb))</code></pre>
-<pre><code>[1] 1</code></pre>
-<p>Selected genotypes</p>
-<pre class="r"><code>sel_genos_b &lt;- AAQQBB + AAQqBB + AAqqBB
-QQ_sel_b &lt;- AAQQBB / sel_genos_b
-print(QQ_sel_b)</code></pre>
-<pre><code>[1] 0.6049383</code></pre>
-<div
-id="answer-the-expected-proportion-of-selected-lines-that-will-be-homozygous-for-the-resistance-qtl-is-60.49"
-class="section level3">
-<h3>Answer: The expected proportion of selected lines that will be
-homozygous for the resistance QTL is 60.49 %</h3>
+a_mat &lt;- coef_coanc_mat*2</code></pre>
+<p>Check accuracy of a mat compared to provided pedigree matrix</p>
+<pre class="r"><code>ped_mat &lt;- as.matrix(read_csv(here::here(&quot;data/Pedigree_Rel.csv&quot;)))</code></pre>
+<pre><code>New names:
+Rows: 40 Columns: 41
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; dbl
+(41): ...1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1...
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...1`</code></pre>
+<pre class="r"><code>ped_mat &lt;- ped_mat[,2:41]
+  
+sum(a_mat-ped_mat)</code></pre>
+<pre><code>[1] 0</code></pre>
+<p>These matrices are the same!</p>
 </div>
+<div id="question-2" class="section level2">
+<h2>Question 2</h2>
+<p>Read in the file “SNP_data.csv” and write an R function to calculate
+the genomic relationship matrix. (5 pts)</p>
+<pre class="r"><code>snp_data &lt;- read_csv(here::here(&quot;data/SNP_data.csv&quot;))</code></pre>
+<pre><code>New names:
+Rows: 40 Columns: 9801
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; dbl
+(9801): ...1, 1_4, 1_6, 1_7, 1_9, 1_10, 1_12, 1_14, 1_15, 1_16, 1_18, 1_...
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...1`</code></pre>
+<pre class="r"><code>snp_data &lt;- snp_data[,2:ncol(snp_data)]
+## Center marker scores on each marker mean
+z &lt;- as.matrix(apply(snp_data, 2, function(col) col-mean(col)))
+## Calculate p and 1-p for each marker
+MAF &lt;- function(snp_mat){
+  pm &lt;- c()
+  for (i in 1:ncol(snp_mat)){
+    ref_allele &lt;- (sum(snp_mat[,i]==0)*2+sum(snp_mat[,i]==1))/(nrow(snp_mat)*2)
+    alt_allele &lt;- (sum(snp_mat[,i]==2)*2+sum(snp_mat[,i]==1))/(nrow(snp_mat)*2)
+    pm[i] &lt;- min(c(ref_allele,alt_allele))
+  }
+  return(pm)
+}
+
+p &lt;- MAF(snp_data)
+q &lt;- 1-p
+
+scaling_factor &lt;- 2*sum(p*q)
+  
+G &lt;- z%*%t(z) / scaling_factor
+G &lt;- round(G,9)</code></pre>
+<p>Check accuracy of g mat compared to provided GRM matrix</p>
+<pre class="r"><code>grm &lt;- as.matrix(read_csv(here::here(&quot;data/Genomic_Rel.csv&quot;)))</code></pre>
+<pre><code>New names:
+Rows: 40 Columns: 41
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; dbl
+(41): ...1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1...
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...1`</code></pre>
+<pre class="r"><code>grm &lt;- grm[,2:ncol(grm)]
+grm &lt;- round(grm,9)
+
+sum(G-grm)</code></pre>
+<pre><code>[1] 0</code></pre>
+<p>These matrices are the same!</p>
 </div>
-<div id="b" class="section level2">
-<h2>2B)</h2>
-<p>What is the expected value for offspring with the genotype AABB? (3
-pts)</p>
-<pre class="r"><code>AABB_e &lt;- AAQQBB*5 + AAQqBB*0 + AAqqBB*-5
-print(AABB_e)</code></pre>
-<pre><code>[1] 0.2025</code></pre>
-<div id="answer-the-expected-value-for-offspring-with-aabb-is-0.2025"
-class="section level3">
-<h3>Answer: The expected value for offspring with AABB is 0.2025</h3>
+<div id="question-3" class="section level2">
+<h2>Question 3</h2>
+<p>Plot the off diagonals of the pedigree relationship matrix (x-axis)
+and the genomic relationship matrix (y-axis). Identify at least 1
+difference and provide an explanation (2 pts)</p>
+<pre class="r"><code>offDiag &lt;- function(relMat){
+return(c(relMat[upper.tri(relMat)]))
+}
+plotting_data &lt;- data.frame(x=offDiag(a_mat), y=offDiag(G))
+ggplot(data=plotting_data,aes(x=x, y=y))+
+  geom_point(color=&quot;darkgreen&quot;) +
+  labs(
+    x=&quot;A Matrix&quot;,
+    y=&quot;G Matrix&quot;,
+    title= &quot;Off Diagonals&quot;
+  ) +
+  theme_minimal()</code></pre>
+<p><img src="figure/pset2_tpm.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
+Once difference that we see between the off-diagonal elements of the A
+and G matrices are that the A matrix elements take on discrete values
+where as the element from the G matrix are continuous. This is because
+the A matrix calculates expectations of coefficients of coancestry based
+on discrete assumptions of the starting founders having defined
+relatedness. Those starting assumptions fix discrete expectation values
+that any indiiduals can take at any level of relatedness. Since the GRM
+is the realized additive relationship matrix, each value deviates from
+the expectation, creating continuous values of additive relationship
+coefficients.</p>
 </div>
-</div>
-<div id="c" class="section level2">
-<h2>2C)</h2>
-<p>What is the expected value for lines with the genotype AA? (3
-pts)</p>
-<pre class="r"><code>AAQQBB*5 + AAQQBb*5 + AAQQbb*5 + AAQqBB*0 + AAQqBb*0 + AAQqbb*0 + AAqqBB*(-5) + AAqqBb*(-5) + AAqqbb*(-5)</code></pre>
-<pre><code>[1] 0.25</code></pre>
-<div id="answer-the-expected-value-for-lines-with-aa-is-0.25"
-class="section level3">
-<h3>Answer: The expected value for lines with AA is 0.25</h3>
-</div>
-</div>
-<div id="d" class="section level2">
-<h2>2D)</h2>
-<p>What is the expected value for lines with the genotype BB? (3
-pts)</p>
-<pre class="r"><code>AAQQBB*5 + AaQQBB*5 + aaQQBB*5 + AAQqBB*0 + AaQqBB*0 + aaQqBB*0 + AAqqBB*(-5) + AaqqBB*(-5) + aaqqBB*(-5)</code></pre>
-<pre><code>[1] 0.5</code></pre>
-<div id="answer-the-expected-value-for-lines-with-bb-is-0.5"
-class="section level3">
-<h3>Answer: The expected value for lines with BB is 0.5</h3>
-</div>
-</div>
-<div id="e" class="section level2">
-<h2>2E)</h2>
-<p>How close would a single marker need to be in order for marker
-assisted selection to as effective and the two marker example above? (2
-pts)</p>
-<p>Assume there is a marker c that is linked to qtl q with a
-recombination frequency of rc between c and q in the gametes
-[C/Q][c/q].</p>
-<p>The potential gametes appear with the frequencies: * [C/Q] =
-0.5<em>(1-rc) </em> [C/q] = 0.5<em>(rc) </em> [c/Q] = 0.5<em>(rc) </em>
-[c/q] = 0.5*(1-rc)</p>
-<p>The resulting genotypes appear with the frequenies:</p>
-<ul>
-<li>CCQQ &lt;- freq_CQ*freq_CQ</li>
-<li>CCQq &lt;- freq_CQ* freq_Cq*2</li>
-<li>CCqq &lt;- freq_Cq*freq_Cq</li>
-<li>CcQQ &lt;- freq_CQ* freq_cQ*2</li>
-<li>CcQq &lt;- freq_CQ* freq_cq* 2 + freq_Cq* freq_cQ*2</li>
-<li>Ccqq &lt;- freq_Cq* freq_cq*2</li>
-<li>ccQQ &lt;- freq_cQ* freq_cQ</li>
-<li>ccQq &lt;- freq_cQ* freq_cq*2</li>
-<li>ccqq &lt;- freq_cq*freq_cq</li>
-</ul>
-<p>If we select only the lines with CC marker scores, the expected
-genotypic value would be as follows:</p>
-<ul>
-<li>Expected Value = CCQQ* 5 + CCQq* 0 + CCqq* -5 or</li>
-<li>Expected Value = (0.5* (1-rc))* (0.5* (1-rc))* 5 + (0.5* rc)(0.5*
-rc)* (-5)</li>
-<li>Expected Value = (5)(0.25rc^2 -0.5rc+0.25) + (-5)(0.25rc^2)</li>
-<li>Expected Value = 1.25rc^2 -2.5rc+1.25-1.25rc^2</li>
-<li>Expected Value = -2.5rc+1.25</li>
-</ul>
-<pre class="r"><code>rc &lt;- (AABB_e-1.25) / (-2.5)
-print(rc)</code></pre>
-<pre><code>[1] 0.419</code></pre>
-<div
-id="answer-a-marker-would-need-to-have-a-recombination-frequency-between-itself-and-the-qtl-of-0.419-for-the-selected-lines-to-have-the-same-expected-value-as-the-lines-selected-with-our-flanking-markers"
-class="section level3">
-<h3>Answer: A marker would need to have a recombination frequency
-between itself and the QTL of 0.419 for the selected lines to have the
-same expected value as the lines selected with our flanking markers</h3>
+<div id="question-4" class="section level2">
+<h2>Question 4</h2>
+<p>Plot the diagonals of the pedigree relationship matrix (x-axis) and
+the genomic relationship matrix (y-axis). Identify at least 1 difference
+and provide an explanation (2 pts)</p>
+<pre class="r"><code>plotting_data &lt;- data.frame(x=diag(a_mat), y=diag(G))
+ggplot(data=plotting_data,aes(x=x, y=y))+
+  geom_point(color=&quot;darkgreen&quot;) +
+  labs(
+    x=&quot;A Matrix&quot;,
+    y=&quot;G Matrix&quot;,
+    title= &quot;Diagonals&quot;
+  ) +
+  theme_minimal()</code></pre>
+<p><img src="figure/pset2_tpm.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>One major difference that we see between the diagonals of the A and G
+matrix diagonals is that in the A matrix, values cannot extend below 0
+whereas in the GRM, values dip as low as about 0.69. This is primarily
+due to the fact that the A matrix does not allow expected values of
+coefficients of coancestry to extend below 0, wheras in the realized G
+matrix, these can definitely fall below 0. This leads to negative values
+of inbreeding coefficients which create diagonal elements in the GRM
+that are below 1.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -916,19 +808,25 @@ tzcode source: internal
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] here_1.0.1      lubridate_1.9.4 forcats_1.0.0   stringr_1.5.1  
+ [5] dplyr_1.1.4     purrr_1.0.2     readr_2.1.5     tidyr_1.3.1    
+ [9] tibble_3.2.1    ggplot2_3.5.1   tidyverse_2.0.0
+
 loaded via a namespace (and not attached):
- [1] vctrs_0.6.5       cli_3.6.3         knitr_1.49        rlang_1.1.4      
- [5] xfun_0.49         stringi_1.8.4     promises_1.3.2    jsonlite_1.8.9   
- [9] workflowr_1.7.1   glue_1.8.0        rprojroot_2.0.4   git2r_0.35.0     
-[13] htmltools_0.5.8.1 httpuv_1.6.15     sass_0.4.9        rmarkdown_2.29   
-[17] evaluate_1.0.1    jquerylib_0.1.4   tibble_3.2.1      fastmap_1.2.0    
-[21] yaml_2.3.10       lifecycle_1.0.4   whisker_0.4.1     stringr_1.5.1    
-[25] compiler_4.4.1    fs_1.6.5          Rcpp_1.0.13-1     pkgconfig_2.0.3  
-[29] rstudioapi_0.17.1 later_1.4.1       digest_0.6.37     R6_2.5.1         
-[33] pillar_1.10.0     magrittr_2.0.3    bslib_0.8.0       tools_4.4.1      
-[37] cachem_1.1.0     </code></pre>
-</div>
-</div>
+ [1] sass_0.4.9        generics_0.1.3    stringi_1.8.4     hms_1.1.3        
+ [5] digest_0.6.37     magrittr_2.0.3    evaluate_1.0.1    grid_4.4.1       
+ [9] timechange_0.3.0  fastmap_1.2.0     rprojroot_2.0.4   workflowr_1.7.1  
+[13] jsonlite_1.8.9    promises_1.3.2    scales_1.3.0      jquerylib_0.1.4  
+[17] cli_3.6.3         crayon_1.5.3      rlang_1.1.4       bit64_4.5.2      
+[21] munsell_0.5.1     withr_3.0.2       cachem_1.1.0      yaml_2.3.10      
+[25] parallel_4.4.1    tools_4.4.1       tzdb_0.4.0        colorspace_2.1-1 
+[29] httpuv_1.6.15     vctrs_0.6.5       R6_2.5.1          lifecycle_1.0.4  
+[33] git2r_0.35.0      bit_4.5.0.1       fs_1.6.5          vroom_1.6.5      
+[37] pkgconfig_2.0.3   pillar_1.10.0     bslib_0.8.0       later_1.4.1      
+[41] gtable_0.3.6      glue_1.8.0        Rcpp_1.0.13-1     xfun_0.49        
+[45] tidyselect_1.2.1  rstudioapi_0.17.1 knitr_1.49        farver_2.1.2     
+[49] htmltools_0.5.8.1 labeling_0.4.3    rmarkdown_2.29    compiler_4.4.1   </code></pre>
 </div>
 </div>
 </div>

@@ -1,6 +1,6 @@
 ---
 title: "Matrix Algebra"
-author: "Kelly Robbins"
+author: "Tim Mulderrig"
 date: "2025-01-28"
 output: html_document
 ---

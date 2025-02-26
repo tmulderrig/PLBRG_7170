@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2025-02-11" />
+
+<title>Data for Breeding Value</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PLBRG_7170</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Data for Breeding Value</h1>
+<h4 class="author">Tim Mulderrig</h4>
+<h4 class="date">February 11, 2025</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2025-02-25
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>PLBRG_7170/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20250128code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20250128)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20250128code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20250128)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170treeba34ff682968aca86fb420fe14b17c214d91cb59targetblankba34ff6a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/tmulderrig/PLBRG_7170/tree/ba34ff682968aca86fb420fe14b17c214d91cb59" target="_blank">ba34ff6</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomtmulderrigPLBRG7170treeba34ff682968aca86fb420fe14b17c214d91cb59targetblankba34ff6a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/tmulderrig/PLBRG_7170/tree/ba34ff682968aca86fb420fe14b17c214d91cb59" target="_blank">ba34ff6</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/Lab4_DataForBreedingValue.Rmd
+    Untracked:  analysis/pset1_tpm.pdf
+
+Unstaged changes:
+    Modified:   analysis/Lab3_ProgrammingAlphaSimR.Rmd
+    Modified:   analysis/index.Rmd
+    Modified:   analysis/lab2_MatrixAlgebra.Rmd
+    Modified:   analysis/pset1_tpm.Rmd
+    Modified:   output/QTLgenotypes.csv
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+<div id="objectives" class="section level2">
+<h2>Objectives</h2>
+<p>We will be using <code>AlphaSimR</code> to<br />
+* Simulate datasets to test statistical genetic analysis methods<br />
+* Simulate whole breeding programs in view of optimizing them</p>
+<p>Example code to work with <code>AlphaSimR</code> to<br />
+1. Create a population and get breeding values from
+<code>AlphaSimR</code> and from an “experiment”<br />
+2. Prepare a data structure for breeding records that will be useful for
+simulation.<br />
+3. Use this data structure in simple linear model analyses.</p>
+<div id="reproducibility" class="section level3">
+<h3>Reproducibility</h3>
+<p>Here is the <a href="./README.md">README file</a> for this report</p>
+</div>
+<div id="script-setup" class="section level3">
+<h3>Script setup</h3>
+<p>Install packages, start the README.md, set the random seed.<br />
+Hiding all this because you have seen it before.</p>
+</div>
+<div id="script-parameters" class="section level3">
+<h3>Script parameters</h3>
+<pre class="r"><code>nFounders &lt;- 100
+nChr &lt;- 7
+segSites &lt;- 140
+nQTL &lt;- 100</code></pre>
+</div>
+</div>
+<div id="genotypic-value-versus-breeding-value" class="section level2">
+<h2>Genotypic value versus breeding value</h2>
+<p>By default, the additive genetic variance among founders will be 1.
+Here are a couple of <code>AlphaSimR</code> genetic models with
+non-additive gene action. <code>addTraitAD</code> gives an additive +
+dominance gene action. Each locus has its own dominance deviation and
+there is a variance of it among loci:<br />
+<span class="math inline">\(dd \sim N(meanDD, varDD)\)</span><br />
+<code>addTraitADE</code> adds pairwise additive by additive
+epistasis.</p>
+<pre class="r"><code># Create haplotypes for founder population of outbred individuals
+founderHaps &lt;- AlphaSimR::runMacs(nInd = nFounders, nChr = nChr, segSites = segSites)
+# Setup the genotype to phenotype mapping
+SP &lt;- AlphaSimR::SimParam$new(founderHaps)
+meanDD &lt;- 0.4
+varDD &lt;- 0.04
+
+# Additive and dominance model
+SP$addTraitAD(nQtlPerChr = nQTL, meanDD = meanDD, varDD = varDD)
+
+# Create a new population of founders
+founders &lt;- AlphaSimR::newPop(founderHaps, simParam = SP)
+
+# Compare genotypic and breeding values
+corBVGV &lt;- cor(AlphaSimR::gv(founders), AlphaSimR::bv(founders)) %&gt;%
+    round(3)
+plot(AlphaSimR::gv(founders), AlphaSimR::bv(founders), pch = 16, xlab = &quot;Genotypic value&quot;,
+    ylab = &quot;Breeding value&quot;, main = paste0(&quot;BV vs GV: AD model, cor=&quot;, corBVGV),
+    cex.axis = 1.3, cex.lab = 1.3)
+
+# Additive dominance and epistasis model
+# &#39;the relative value of additive-by-additive variance 
+# compared to additive variance&#39;
+SP &lt;- AlphaSimR::SimParam$new(founderHaps)
+relAA &lt;- 0.5
+SP$addTraitADE(nQtlPerChr = nQTL, meanDD = meanDD, varDD = varDD, relAA = relAA)
+
+# Create a new population of founders
+founders &lt;- AlphaSimR::newPop(founderHaps, simParam = SP)
+
+# Compare genotypic and breeding values
+corBVGV &lt;- cor(AlphaSimR::gv(founders), AlphaSimR::bv(founders)) %&gt;%
+    round(3)
+plot(AlphaSimR::gv(founders), AlphaSimR::bv(founders), pch = 16, xlab = &quot;Genotypic value&quot;,
+    ylab = &quot;Breeding value&quot;, main = paste0(&quot;BV vs GV: ADE model, cor=&quot;, corBVGV),
+    cex.axis = 1.3, cex.lab = 1.3)</code></pre>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Compare%20breeding%20value%20to%20genotypic%20value-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/Compare%20breeding%20value%20to%20genotypic%20value-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="estimated-versus-analytical-breeding-value"
+class="section level2">
+<h2>Estimated versus analytical breeding value</h2>
+<p>Estimating the breeding value by a progeny test.<br />
+In practice, the BV can’t be observed. A progeny test calculates the
+average deviation from the population mean of progeny from randomly
+mating an individual to the population: 2 * mean(progeny pheno - pop
+mean)</p>
+<pre class="r"><code># Error variance for phenotypic evaluations
+varE &lt;- 1
+# Number of progeny for breeding value estimation
+nProgeny1 &lt;- 5
+nProgeny2 &lt;- 50
+
+# Estimate breeding values  
+# ind is the individual whose breeding value you want to estimate  
+# pop is the population that individual is in  
+# nProgeny is the number of progeny for the test  
+# varE is the error variance with which phenotypes are evaluated
+#      if the genotypic variance is 1 then varE=1 will give h2 = 0.5
+estimateBV &lt;- function(ind, pop, nProgeny, varE = 1) {
+    # I&#39;m going to cheat a little and assume we know the population mean exactly
+    popMean &lt;- AlphaSimR::gv(pop) %&gt;%
+        mean
+    # Set up crossPlan to cross ind to random others nProgeny times
+    crossPlan &lt;- cbind(ind, sample(AlphaSimR::nInd(pop), nProgeny, replace = T))
+    progeny &lt;- AlphaSimR::makeCross(pop, crossPlan)
+    progPheno &lt;- AlphaSimR::setPheno(progeny, varE = varE, onlyPheno = T)
+    return(2 * (mean(progPheno) - popMean))
+}
+
+# estimate BV with a progeny test of nProgeny1
+estimatedBV &lt;- sapply(1:AlphaSimR::nInd(founders), estimateBV, pop = founders, nProgeny = nProgeny1,
+    varE = varE)
+# Compare estimated and analytical breeding values
+plot(estimatedBV, AlphaSimR::bv(founders), pch = 16, xlab = &quot;Estimated value&quot;, ylab = &quot;Analytical value&quot;,
+    main = paste(&quot;Breeding value estimated from&quot;, nProgeny1, &quot;Progeny&quot;))
+
+# estimate BV with a progeny test of nProgeny2
+estimatedBV &lt;- sapply(1:AlphaSimR::nInd(founders), estimateBV, pop = founders, nProgeny = nProgeny2,
+    varE = varE)
+# Compare estimated and analytical breeding values
+plot(estimatedBV, AlphaSimR::bv(founders), pch = 16, xlab = &quot;Estimated value&quot;, ylab = &quot;Analytical value&quot;,
+    main = paste(&quot;Breeding value estimated from&quot;, nProgeny2, &quot;Progeny&quot;))</code></pre>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Estimate%20breeding%20value-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/Estimate%20breeding%20value-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="round-robin-crossing-design" class="section level2">
+<h2>Round robin crossing design</h2>
+<p>This is a simple design that ensures that all parents get used
+equally</p>
+<pre class="r"><code>makeRoundRobin &lt;- function(pop, makeRandom = F) {
+    nInd &lt;- AlphaSimR::nInd(pop)
+    parOrder &lt;- 1:nInd
+    if (makeRandom)
+        parOrder &lt;- sample(parOrder)
+    return(cbind(parOrder, parOrder[c(2:nInd, 1)]))
+}
+
+# Make a bunch of new lines
+crossPlan &lt;- makeRoundRobin(founders)
+exptLines &lt;- AlphaSimR::makeCross(founders, crossPlan)
+
+cbind(exptLines@id, exptLines@mother, exptLines@father) %&gt;%
+    head
+     [,1]   [,2] [,3]
+[1,] &quot;5601&quot; &quot;1&quot;  &quot;2&quot; 
+[2,] &quot;5602&quot; &quot;2&quot;  &quot;3&quot; 
+[3,] &quot;5603&quot; &quot;3&quot;  &quot;4&quot; 
+[4,] &quot;5604&quot; &quot;4&quot;  &quot;5&quot; 
+[5,] &quot;5605&quot; &quot;5&quot;  &quot;6&quot; 
+[6,] &quot;5606&quot; &quot;6&quot;  &quot;7&quot; </code></pre>
+</div>
+<div id="records-data-structure" class="section level2">
+<h2><code>records</code> data structure</h2>
+<p><code>AlphaSimR</code> populations only retain phenotypes of the most
+recent evaluation. In plant breeding, it is common to evaluate the same
+line more than once, and it makes sense to include all of those
+phenotypes in downstream analyses. Here, I propose a simple tibble to
+retain phenotypic records.</p>
+<div id="set-up-records" class="section level3">
+<h3>Set up records</h3>
+<p>The columns are the individual <code>id</code>, its seed parent id
+<code>seedPar</code>, its pollen parent id <code>pollenPar</code>, its
+observed phenotype <code>pheno</code>, and the error variance of that
+observed phenotype <code>varE</code></p>
+<pre class="r"><code>nInd &lt;- 100
+varE &lt;- 1
+# Function to make a simple data structure out of a population
+# AlphaSimR doesn&#39;t retain varE once you have setPheno, so supply it
+makeRecFromPop &lt;- function(pop, varE = 1) {
+    dplyr::tibble(id = pop@id, seedPar = pop@mother, pollenPar = pop@father, pheno = AlphaSimR::pheno(pop),
+        varE = varE)
+}
+
+# Run a phenotyping experiment and populate the `records` data structure
+exptLines &lt;- AlphaSimR::setPheno(exptLines, varE = varE, simParam = SP)
+records &lt;- makeRecFromPop(exptLines, varE = varE)
+head(records)
+
+# Compare genotypic and phenotypic values
+corPhGV &lt;- cor(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines)) %&gt;%
+    round(3)
+plot(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines), pch = 16, xlab = &quot;Genetic value&quot;,
+    ylab = &quot;Phenotype&quot;, main = paste0(&quot;First Evaluation, cor=&quot;, corPhGV))
+
+# Second evaluation
+exptLines &lt;- AlphaSimR::setPheno(exptLines, varE = varE, simParam = SP)
+# Add the new records to the old ones
+records &lt;- dplyr::bind_rows(records, makeRecFromPop(exptLines, varE = varE))
+
+# Compare genotypic and phenotypic values
+corPhGV &lt;- cor(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines)) %&gt;%
+    round(3)
+plot(AlphaSimR::gv(exptLines), AlphaSimR::pheno(exptLines), pch = 16, xlab = &quot;Genetic value&quot;,
+    ylab = &quot;Phenotype&quot;, main = paste0(&quot;Second Evaluation, cor=&quot;, corPhGV))
+# A tibble: 6 × 5
+  id    seedPar pollenPar pheno[,&quot;Trait1&quot;]  varE
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt;
+1 5601  1       2                   0.290      1
+2 5602  2       3                   1.60       1
+3 5603  3       4                   0.0527     1
+4 5604  4       5                  -1.32       1
+5 5605  5       6                   1.30       1
+6 5606  6       7                  -0.802      1</code></pre>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Set%20up%20records-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/Set%20up%20records-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="use-records-to-estimate-genotypic-value-from-1-observation"
+class="section level2">
+<h2>Use records to estimate genotypic value from &gt;1 observation</h2>
+<pre class="r"><code># BASIC LINEAR MODEL
+lmEstGV &lt;- lm(pheno ~ -1 + id, data = records)
+gvEstimates &lt;- coefficients(lmEstGV)
+
+# Compare genotypic and **Combined** phenotypic values
+corEstGV &lt;- cor(AlphaSimR::gv(exptLines), gvEstimates) %&gt;%
+    round(3)
+plot(AlphaSimR::gv(exptLines), gvEstimates, pch = 16, xlab = &quot;Genetic value&quot;, ylab = &quot;Phenotype&quot;,
+    main = paste0(&quot;Both Evaluations, cor=&quot;, corEstGV))</code></pre>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/Linear%20model%20estimation-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="use-records-in-two-stage-selection" class="section level2">
+<h2>Use records in two-stage selection</h2>
+<p>In plant breeding there is often a preliminary evaluation stage, then
+a more advanced stage. We can use the records to keep track of these
+stages.</p>
+<pre class="r"><code>nIndStage1 &lt;- 400
+nIndStage2 &lt;- 100
+varEstage1 &lt;- 4
+varEstage2 &lt;- 1
+
+progenyPerCross &lt;- nIndStage1/nrow(crossPlan)
+# The production pipeline starts with a bunch of new lines
+exptLines &lt;- AlphaSimR::makeCross(founders, crossPlan, nProgeny = progenyPerCross)
+
+# Phenotypic evaluation of experimental lines
+exptLines &lt;- AlphaSimR::setPheno(exptLines, varE = varEstage1, simParam = SP)
+records &lt;- makeRecFromPop(exptLines, varE = varEstage1)
+
+# Select among lines to advance to Stage 2
+keep &lt;- AlphaSimR::pheno(exptLines) %&gt;%
+    order(decreasing = T) %&gt;%
+    .[1:nIndStage2]
+
+# Phenotypic evaluation of Stage 2 lines
+stage2Lines &lt;- exptLines[keep]
+stage2Lines &lt;- AlphaSimR::setPheno(stage2Lines, varE = varEstage2, simParam = SP)
+records &lt;- dplyr::bind_rows(records, makeRecFromPop(stage2Lines, varE = varEstage2))
+
+str(records)
+tibble [500 × 5] (S3: tbl_df/tbl/data.frame)
+ $ id       : chr [1:500] &quot;5701&quot; &quot;5702&quot; &quot;5703&quot; &quot;5704&quot; ...
+ $ seedPar  : chr [1:500] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; ...
+ $ pollenPar: chr [1:500] &quot;2&quot; &quot;2&quot; &quot;2&quot; &quot;2&quot; ...
+ $ pheno    : num [1:500, 1] -2.65 2.056 4.305 3.411 -0.319 ...
+ $ varE     : num [1:500] 4 4 4 4 4 4 4 4 4 4 ...</code></pre>
+</div>
+<div id="estimate-gain-from-selection-four-ways" class="section level2">
+<h2>Estimate gain from selection four ways</h2>
+<p>This little section is mostly to illustrate that
+<code>AlphaSimR</code> thinks of breeding values <em>relative to the
+population mean</em>, but of genotypic values in <em>absolute</em>
+terms.</p>
+<pre class="r"><code>print(&quot;Gain from selection on BV where the reference pop is stage2Lines&quot;)
+print(paste(&quot;Gain from selection&quot;, round(mean(AlphaSimR::bv(stage2Lines)) - mean(AlphaSimR::bv(exptLines)),
+    2)))
+
+print(&quot;Gain from selection on BV where the reference pop is all exptLines&quot;)
+print(paste(&quot;Gain from selection&quot;, round(mean(AlphaSimR::bv(exptLines)[keep]) - mean(AlphaSimR::bv(exptLines)),
+    2)))
+
+print(&quot;Gain from selection on **GV** where the reference pop is stage2Lines&quot;)
+print(paste(&quot;Gain from selection&quot;, round(mean(AlphaSimR::gv(stage2Lines)) - mean(AlphaSimR::gv(exptLines)),
+    2)))
+
+print(&quot;Gain from selection on **GV** where the reference pop is all exptLines&quot;)
+print(paste(&quot;Gain from selection&quot;, round(mean(AlphaSimR::gv(exptLines)[keep]) - mean(AlphaSimR::gv(exptLines)),
+    2)))
+[1] &quot;Gain from selection on BV where the reference pop is stage2Lines&quot;
+[1] &quot;Gain from selection 0&quot;
+[1] &quot;Gain from selection on BV where the reference pop is all exptLines&quot;
+[1] &quot;Gain from selection 0.53&quot;
+[1] &quot;Gain from selection on **GV** where the reference pop is stage2Lines&quot;
+[1] &quot;Gain from selection 0.64&quot;
+[1] &quot;Gain from selection on **GV** where the reference pop is all exptLines&quot;
+[1] &quot;Gain from selection 0.64&quot;</code></pre>
+</div>
+<div id="homework" class="section level2">
+<h2>Homework</h2>
+<ol style="list-style-type: decimal">
+<li>We saw how to write a function to estimate breeding values by doing
+a progeny test (chunk <code>Estimate breeding value</code>). Then, in
+the chunk <code>Linear model estimation</code>, we used a simple linear
+model to combine records to estimate the genotypic values of individuals
+(chunk <code>Linear model estimation</code>).<br />
+Tweak the linear model so that it estimates, for example, the breeding
+values of the seed parent. HINT: this will entail introducing
+<code>seedPar</code> into the model. Use the <code>exptLines</code> and
+their associated <code>records</code> from the
+<code>Two stage selection</code> chunk.</li>
+</ol>
+<pre class="r"><code>lmEstParBV &lt;- lm(pheno ~ 1 + seedPar, data = records)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Make plots comparing the breeding values thus obtained to those
+obtained by the <code>bv</code> function or by our own
+<code>estimateBV</code> function.</li>
+</ol>
+<pre class="r"><code>corBV_lmBV &lt;- cor(AlphaSimR::bv(founders), lmEstParBV$coefficients)
+plot(AlphaSimR::bv(founders), lmEstParBV$coefficients)</code></pre>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>The <code>lm</code> function from the <code>stats</code> package can
+account for observations with different weights. Weights should be the
+inverse of the error variance for the observation. Handily, we keep that
+error variance in the <code>records</code> tibble. Again, tweak the
+linear model and use the records from the
+<code>Two stage selection</code> chunk to account for the different
+error variances from Stage 1 versus Stage 2 when you estimate the
+genotypic values for individuals.</li>
+</ol>
+<pre class="r"><code>lmEstParBV_wgtd &lt;- lm(pheno ~ 1 + seedPar, weights = 1/varE, data = records)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Correlate the genotypic values obtained with or without weighting to
+the simulated values obtained by the <code>AlphaSimR::gv</code>
+function.</li>
+</ol>
+<pre class="r"><code>cor(AlphaSimR::gv(founders), lmEstParBV$coefficients)
+cor(AlphaSimR::gv(founders), lmEstParBV_wgtd$coefficients)
+                [,1]
+Trait1 -0.0009093427
+                [,1]
+Trait1 -0.0002745567</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><em>BONUS</em> for everyone: There is random error associated with
+all of these simulations. If you want to see how the breeding value from
+the linear model compares with the <code>estimateBV</code> function, or
+how weighted versus unweighted estimates of genotypic value correlate to
+the truth, you will have to do each analysis multiple times and get
+means and standard deviations.</li>
+</ol>
+<pre class="r"><code>iterations &lt;- 1000
+nIndStage1 &lt;- 400
+nIndStage2 &lt;- 100
+varEstage1 &lt;- 0.4
+varEstage2 &lt;- 0.1
+progenyPerCross &lt;- nIndStage1/nrow(crossPlan)
+
+corBV_lmBV_it &lt;- c()
+corBV_lmBV_wgt_it &lt;- c()
+
+for (i in 1:iterations) {
+
+    sim_expt &lt;- AlphaSimR::setPheno(exptLines, varE = varE, simParam = SP)
+    sim_records &lt;- makeRecFromPop(sim_expt, varE = varEstage1)
+    sim_keep &lt;- AlphaSimR::pheno(sim_expt) %&gt;%
+        order(decreasing = T) %&gt;%
+        .[1:nIndStage2]
+    sim_stage2 &lt;- sim_expt[sim_keep]
+    sim_stage2 &lt;- AlphaSimR::setPheno(sim_stage2, varE = varEstage2, simParam = SP)
+    sim_records &lt;- dplyr::bind_rows(sim_records, makeRecFromPop(sim_stage2, varE = varEstage2))
+
+    sim_lm &lt;- lm(pheno ~ 1 + seedPar, data = sim_records)
+    corBV_lmBV_it[i] &lt;- cor(AlphaSimR::bv(founders), sim_lm$coefficients)
+    sim_lm_wtg &lt;- lm(pheno ~ 1 + seedPar, weights = 1/varE, data = sim_records)
+    corBV_lmBV_wgt_it[i] &lt;- cor(AlphaSimR::bv(founders), sim_lm_wtg$coefficients)
+
+}</code></pre>
+<pre class="r"><code>ggplot(data = as.data.frame(corBV_lmBV_it), aes(x = corBV_lmBV_it)) + geom_histogram(bins = 20,
+    color = &quot;darkgray&quot;, fill = &quot;beige&quot;) + ggtitle(&quot;Correlations of lm and bv() estimated breeding values&quot;) +
+    geom_vline(xintercept = mean(corBV_lmBV_it), linewidth = 1, color = &quot;black&quot;) +
+    annotate(&quot;text&quot;, x = 0.2, y = 150, label = (paste0(&quot;Mean: &quot;, round(mean(corBV_lmBV_it),
+        2)))) + annotate(&quot;text&quot;, x = 0.2, y = 140, label = (paste0(&quot;SD: &quot;, round(sd(corBV_lmBV_it),
+    2)))) + theme_classic()
+
+ggplot(data = as.data.frame(corBV_lmBV_wgt_it), aes(x = corBV_lmBV_wgt_it)) + geom_histogram(bins = 20,
+    color = &quot;darkgray&quot;, fill = &quot;beige&quot;) + ggtitle(&quot;Correlations of weighted lm and bv() estimated breeding values&quot;) +
+    geom_vline(xintercept = mean(corBV_lmBV_wgt_it), linewidth = 1, color = &quot;black&quot;) +
+    annotate(&quot;text&quot;, x = 0.2, y = 150, label = (paste0(&quot;Mean: &quot;, round(mean(corBV_lmBV_wgt_it),
+        2)))) + annotate(&quot;text&quot;, x = 0.2, y = 140, label = (paste0(&quot;SD: &quot;, round(sd(corBV_lmBV_wgt_it),
+    2)))) + theme_classic()
+</code></pre>
+<p><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Lab4_DataForBreedingValue.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li><em>BONUS</em> for stat heads. You could run a linear model with
+both <code>seedPar</code> and <code>pollenPar</code> as factors. But
+that would lead to separate estimates of these effects when in fact the
+same individuals are both seed and pollen parents. How could you
+implement a linear model that would estimate one effect per parent
+regardless of whether it was a seed or pollen parent?</li>
+</ol>
+<pre class="r"><code>pivot_records &lt;- pivot_longer(data = records, cols = c(&quot;seedPar&quot;, &quot;pollenPar&quot;), values_to = &quot;parents&quot;)
+pivot_lm &lt;- lm(pheno ~ 1 + parents, data = pivot_records)
+cor(AlphaSimR::bv(founders), coefficients(pivot_lm))
+             [,1]
+Trait1 0.08074739</code></pre>
+<div id="homework-grading" class="section level3">
+<h3>Homework grading</h3>
+<p>I want to receive a zipped folder with your homework in it one week
+from today, before lab. Please use the <code>workflowr</code> package to
+create the folder structure. You should have created an Rmarkdown script
+that will create an html file that I can look through. So:<br />
+1. 2 points for sending in a zipped folder on time.<br />
+2. 2 points for each successful step (1 through 4) from above, with
+partial credit.<br />
+3. Each BONUS is worth two points. So you can get &gt;10 points if you
+want to slack off on some other lab.<br />
+4. I will subtract 0.5 points for every day the homework is late.</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()
+R version 4.4.1 (2024-06-14)
+Platform: aarch64-apple-darwin20
+Running under: macOS 15.3.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] lubridate_1.9.4 forcats_1.0.0   stringr_1.5.1   dplyr_1.1.4    
+ [5] purrr_1.0.2     readr_2.1.5     tidyr_1.3.1     tibble_3.2.1   
+ [9] ggplot2_3.5.1   tidyverse_2.0.0
+
+loaded via a namespace (and not attached):
+ [1] utf8_1.2.4        sass_0.4.9        generics_0.1.3    stringi_1.8.4    
+ [5] hms_1.1.3         digest_0.6.37     magrittr_2.0.3    evaluate_1.0.1   
+ [9] grid_4.4.1        timechange_0.3.0  fastmap_1.2.0     rprojroot_2.0.4  
+[13] workflowr_1.7.1   jsonlite_1.8.9    formatR_1.14      promises_1.3.2   
+[17] scales_1.3.0      jquerylib_0.1.4   Rdpack_2.6.2      cli_3.6.3        
+[21] crayon_1.5.3      rlang_1.1.4       rbibutils_2.3     bit64_4.5.2      
+[25] munsell_0.5.1     withr_3.0.2       cachem_1.1.0      yaml_2.3.10      
+[29] AlphaSimR_1.6.1   parallel_4.4.1    tools_4.4.1       tzdb_0.4.0       
+[33] colorspace_2.1-1  httpuv_1.6.15     here_1.0.1        vctrs_0.6.5      
+[37] R6_2.5.1          lifecycle_1.0.4   git2r_0.35.0      bit_4.5.0.1      
+[41] fs_1.6.5          vroom_1.6.5       pkgconfig_2.0.3   pillar_1.10.0    
+[45] bslib_0.8.0       later_1.4.1       gtable_0.3.6      glue_1.8.0       
+[49] Rcpp_1.0.13-1     xfun_0.49         tidyselect_1.2.1  rstudioapi_0.17.1
+[53] knitr_1.49        farver_2.1.2      htmltools_0.5.8.1 labeling_0.4.3   
+[57] rmarkdown_2.29    compiler_4.4.1   </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

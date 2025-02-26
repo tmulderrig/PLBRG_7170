@@ -17,3 +17,7 @@ This is my site for submitting work for PLBRG7170 course
 [Problem Set 1](pset1_tpm.html)
 
 [Lab 3](Lab3_ProgrammingAlphaSimR.html)
+
+[Lab 4](Lab_DataForBreedingValue.html)
+
+[Problem Set 2](pset2_tpm.html)
